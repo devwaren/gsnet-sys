@@ -1,8 +1,9 @@
-import { login, profile, register, session } from "./auth";
+import { login, profile, register, sessionIds, sessions } from "./auth";
 
 export const schema = {
 	login,
 	register,
 	profile,
-	session,
+	sessions,
+	sessionIds,
 };
