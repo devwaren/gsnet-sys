@@ -12,7 +12,7 @@ dist-ssr
 .vscode
 __unconfig*
 todos.json
-gen
+src/gen
 agents.md
 package-lock.json
 *.txt

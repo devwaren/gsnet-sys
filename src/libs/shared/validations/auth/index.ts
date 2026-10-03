@@ -1,3 +1,4 @@
+export { email } from "./email.schema";
 export { login } from "./login.schema";
 export { profile } from "./profile.schema";
 export { register } from "./register.schema";

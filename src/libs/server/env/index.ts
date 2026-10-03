@@ -7,6 +7,7 @@ export const env = {
 			aes: setEnv("AES_SECRET"),
 			jwt: setEnv("JWT_SECRET"),
 			zeroDay: setEnv("ZERODAY_SECRET"),
+			internal: setEnv("INTERNAL_HMAC_SECRET"),
 		},
 	},
 	sdk: {

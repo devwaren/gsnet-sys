@@ -1,4 +1,4 @@
-import { login, profile, register, sessionIds, sessions } from "./auth";
+import { email, login, profile, register, sessionIds, sessions } from "./auth";
 
 export const schema = {
 	login,
@@ -6,4 +6,5 @@ export const schema = {
 	profile,
 	sessions,
 	sessionIds,
+	email,
 };
