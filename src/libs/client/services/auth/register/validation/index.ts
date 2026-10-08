@@ -1,13 +1,17 @@
-import { schema } from "#/libs/shared/validations/index.ts";
+import { server } from "#/libs/server/utils";
+import { schema } from "#/libs/shared/validations";
 
 const register = (data: unknown) => {
-	const validateData = schema.register.safeParse(data);
+	const result = schema.register.safeParse(data);
 
-	if (!validateData.success) {
-		throw new Error("invalid data");
+	if (!result.success) {
+		server.log("[validation] Failed", result.error);
+		return null;
 	}
 
-	return validateData.data;
+	server.log("[validation] Success!");
+
+	return result.data;
 };
 
 export const validate = {

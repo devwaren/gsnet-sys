@@ -1,4 +1,4 @@
-import { schema } from "#/libs/shared/validations/index.ts";
+import { schema } from "#/libs/shared/validations";
 
 const email = async (data: unknown) => {
 	const validateData = schema.email.safeParse(data);

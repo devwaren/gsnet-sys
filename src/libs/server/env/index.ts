@@ -9,6 +9,7 @@ export const env = {
 			zeroDay: setEnv("ZERODAY_SECRET"),
 			internal: setEnv("INTERNAL_HMAC_SECRET"),
 		},
+		isProd: setEnv("NODE_ENV") === "production",
 	},
 	sdk: {
 		cloudinary: {

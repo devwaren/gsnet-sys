@@ -1,13 +1,17 @@
-import { schema } from "#/libs/shared/validations";
+import { schemaServer } from "#/libs/server/validations";
 import { collection } from "../config";
 
 export const collections = {
 	users: collection({
 		name: "users",
-		schema: schema.profile,
+		schema: schemaServer.user,
+	}),
+	accounts: collection({
+		name: "accounts",
+		schema: schemaServer.accounts,
 	}),
 	sessions: collection({
 		name: "sessions",
-		schema: schema.sessions,
+		schema: schemaServer.sessions,
 	}),
 };
