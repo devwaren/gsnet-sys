@@ -2,10 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { services } from "#/libs/client/services";
 import { client } from "#/libs/client/utils";
-import { useErrorState } from "#/shared/store/error";
+import { useErrorStore } from "#/shared/store/error";
 
 const useLoginEntry = () => {
-	const { setError } = useErrorState();
+	const { setError } = useErrorStore();
 
 	const navigate = useNavigate();
 

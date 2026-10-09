@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { ErrorState } from "./types";
 
-export const useErrorState = create<ErrorState>((set) => ({
+export const useErrorStore = create<ErrorState>((set) => ({
 	error: "",
 	setError: (error) => {
 		set({ error });
