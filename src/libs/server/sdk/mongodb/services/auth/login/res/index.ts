@@ -11,13 +11,3 @@ export const unauthorizedlogin = () =>
 		},
 	);
 
-export const successful = () =>
-	Response.json(
-		{
-			message: http.responses.messages.loggedIn,
-			statusText: http.responses.status[200],
-		},
-		{
-			status: 200,
-		},
-	);

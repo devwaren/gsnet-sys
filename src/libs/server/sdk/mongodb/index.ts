@@ -1,4 +1,4 @@
-import { login, profile, register } from "./services";
+import { getSession, login, profile, register } from "./services";
 
 export const mongoSDK = {
 	services: {
@@ -6,6 +6,7 @@ export const mongoSDK = {
 			login,
 			register,
 			profile,
+			getSession,
 		},
 	},
 };

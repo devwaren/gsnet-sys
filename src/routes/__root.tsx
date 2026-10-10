@@ -1,16 +1,16 @@
-import type { QueryClient } from "@tanstack/react-query";
+import type { QueryClientProviderProps } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
+import type { ComponentProps } from "react";
+import { styles } from "#/shared/styles";
 import appCss from "../styles.css?url";
 
-interface MyRouterContext {
-	queryClient: QueryClient;
-}
+type ContextProps = QueryClientProviderProps["client"];
 
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext<ContextProps>()({
 	head: () => ({
 		meta: [
 			{
@@ -34,15 +34,16 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+type Props = ComponentProps<"html">;
+
+function RootDocument({ children }: Props) {
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
-			<body>
+			<body className={styles.root()}>
 				{children}
-
 				<Scripts />
 			</body>
 		</html>

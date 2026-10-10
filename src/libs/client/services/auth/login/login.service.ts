@@ -1,19 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
+import { setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
 import { httpClient } from "#/libs/client/http";
 import { validate } from "./validation";
 
-type LoginResponse =
-	| {
-			success: true;
-			message: string;
-			statusText: string;
-	  }
-	| {
-			success: false;
-			message: string;
-			statusText: string;
-	  };
+type LoginResponse = {
+	success: boolean;
+	message: string;
+	statusText: string;
+};
 
 const login = createServerFn({ method: "POST" })
 	.validator(validate.login)
@@ -25,6 +20,33 @@ const login = createServerFn({ method: "POST" })
 				data,
 			});
 
+			// Read Set-Cookie from the upstream API response.
+			const cookies = res.headers["set-cookie"];
+
+			if (cookies?.length) {
+				// Extract the session token from the trusted API cookie.
+				const sessionCookie = cookies.find((cookie) =>
+					cookie.startsWith("session_token="),
+				);
+
+				if (sessionCookie) {
+					const token = sessionCookie
+						.split(";")[0]
+						.split("=")
+						.slice(1)
+						.join("=");
+
+					setCookie("session_token", token, {
+						httpOnly: true,
+						secure: true,
+						sameSite: "lax",
+						path: "/",
+						partitioned: true,
+						priority: "high",
+					});
+				}
+			}
+
 			return {
 				success: true,
 				message: res.data.message,
@@ -33,10 +55,7 @@ const login = createServerFn({ method: "POST" })
 		} catch (error: unknown) {
 			if (axios.isAxiosError(error)) {
 				const res = error.response?.data as
-					| {
-							message?: string;
-							statusText?: string;
-					  }
+					| { message?: string; statusText?: string }
 					| undefined;
 
 				return {

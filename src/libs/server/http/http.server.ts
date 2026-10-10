@@ -4,10 +4,12 @@ import axios, { AxiosError } from "axios";
 import { server } from "#/libs/server/utils";
 import { gen } from "../gen";
 
+type HttpServerConfig = AxiosRequestConfig & {
+	request?: Request;
+};
+
 const httpServer = createServerOnlyFn(
-	async <T = unknown>(
-		config: AxiosRequestConfig,
-	): Promise<AxiosResponse<T>> => {
+	async <T = unknown>(config: HttpServerConfig): Promise<AxiosResponse<T>> => {
 		const controller = new AbortController();
 
 		const timeout = setTimeout(() => {
@@ -15,27 +17,32 @@ const httpServer = createServerOnlyFn(
 		}, 10_000);
 
 		try {
-			const method = (config.method ?? "GET").toUpperCase();
-			const url = String(config.url ?? "");
+			const { request, headers: configHeaders, ...axiosConfig } = config;
+
+			const method = (axiosConfig.method ?? "GET").toUpperCase();
+			const url = String(axiosConfig.url ?? "");
 			const timestamp = Date.now();
 
 			const body =
-				typeof config.data === "string"
-					? config.data
-					: config.data
-						? JSON.stringify(config.data)
+				typeof axiosConfig.data === "string"
+					? axiosConfig.data
+					: axiosConfig.data
+						? JSON.stringify(axiosConfig.data)
 						: "";
 
 			const payload = [method, url, timestamp, body].join(":");
 			const signature = gen.internalToken(payload);
 
+			const cookie = request?.headers.get("cookie");
+
 			server.log("[BFF] HTTP Server Initiated");
 
 			const res = await axios<T>({
-				...config,
-				signal: config.signal ?? controller.signal,
+				...axiosConfig,
+				signal: axiosConfig.signal ?? controller.signal,
 				headers: {
-					...config.headers,
+					...configHeaders,
+					...(cookie ? { Cookie: cookie } : {}),
 					"x-internal-signature": signature,
 					"x-internal-timestamp": timestamp.toString(),
 				},
