@@ -6,7 +6,7 @@ export const auth = createMiddleware().server(async ({ next }) => {
 	const session = await mongoSDK.services.auth.getSession();
 
 	if (!session) {
-		throw redirect({ to: "/auth/login" });
+		throw redirect({ to: "/" });
 	}
 
 	return next({

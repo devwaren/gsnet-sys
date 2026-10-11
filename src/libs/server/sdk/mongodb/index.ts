@@ -1,12 +1,21 @@
-import { getSession, login, profile, register } from "./services";
+import {
+	checkAdmin,
+	getProfile,
+	getRole,
+	getSession,
+	login,
+	register,
+} from "./services";
 
 export const mongoSDK = {
 	services: {
 		auth: {
 			login,
 			register,
-			profile,
+			getProfile,
 			getSession,
+			getRole,
+			checkAdmin,
 		},
 	},
 };
