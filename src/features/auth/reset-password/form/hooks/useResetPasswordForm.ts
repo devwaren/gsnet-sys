@@ -9,7 +9,7 @@ const useResetPasswordForm = () => {
 	usePending(mutation.isPending);
 
 	const form = useFormSettings({
-		schema: schema.resetPassword,
+		schema: schema.auth.resetPassword,
 		defaultValues: {
 			password: "",
 			confirmPassword: "",

@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const form = cva([
-	"w-full max-w-2/3 mx-auto",
+	"w-full",
 	"min-h-80",
 	"rounded-xl",
 	"border border-gray-200",

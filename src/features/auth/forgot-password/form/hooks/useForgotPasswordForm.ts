@@ -9,7 +9,7 @@ const useForgotPasswordForm = () => {
 	usePending(mutation.isPending);
 
 	const form = useFormSettings({
-		schema: schema.email,
+		schema: schema.auth.email,
 		defaultValues: {
 			email: "",
 		},

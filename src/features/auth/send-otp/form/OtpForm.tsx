@@ -1,6 +1,5 @@
 import { Form } from "@dev-waren/react-form-kit/hook-form";
 import type { ComponentProps } from "react";
-import { SubmitButton } from "#/shared/components/buttons";
 import { useOtpForm } from "./hooks";
 
 type Props = ComponentProps<"form">;

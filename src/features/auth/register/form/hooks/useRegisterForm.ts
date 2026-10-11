@@ -9,7 +9,7 @@ const useRegisterForm = () => {
 	usePending(mutation.isPending);
 
 	const form = useFormSettings({
-		schema: schema.register,
+		schema: schema.auth.register,
 		defaultValues: {
 			firstName: "",
 			lastName: "",

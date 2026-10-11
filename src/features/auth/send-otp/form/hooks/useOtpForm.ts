@@ -11,7 +11,7 @@ const useOtpForm = () => {
 	usePending(mutation.isPending);
 
 	return useFormSettings({
-		schema: schema.otp,
+		schema: schema.auth.otp,
 		defaultValues: {
 			otp: "",
 		},

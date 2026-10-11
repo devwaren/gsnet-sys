@@ -9,7 +9,7 @@ const useLoginForm = () => {
 	usePending(mutation.isPending);
 
 	const form = useFormSettings({
-		schema: schema.login,
+		schema: schema.auth.login,
 		defaultValues: {
 			email: "",
 			password: "",

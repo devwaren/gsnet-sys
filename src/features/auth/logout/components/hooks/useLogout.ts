@@ -10,10 +10,12 @@ const useLogout = () => {
 		mutationKey: ["logout"],
 		mutationFn: services.auth.logout,
 		onSuccess: (data) => {
-			if (data.success) {
+			if (!data.success) {
 				client.error({ message: data.message });
-				navigate({ to: "/" });
+				return;
 			}
+
+			navigate({ to: "/" });
 
 			client.info({ message: data.message });
 		},
