@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
 import { httpClient } from "#/libs/client/http";
+import { server } from "#/libs/server/utils";
 import { validate } from "./validation";
 
 type LoginResponse = {
@@ -20,32 +21,46 @@ const login = createServerFn({ method: "POST" })
 				data,
 			});
 
-			// Read Set-Cookie from the upstream API response.
 			const cookies = res.headers["set-cookie"];
+			const sessionCookie = cookies
+				?.flatMap((cookie) => cookie.split(/,(?=\s*session_token=)/i))
+				.find((cookie) => /^\s*session_token=/i.test(cookie));
 
-			if (cookies?.length) {
-				// Extract the session token from the trusted API cookie.
-				const sessionCookie = cookies.find((cookie) =>
-					cookie.startsWith("session_token="),
-				);
+			if (!sessionCookie) {
+				console.error("Login succeeded but session cookie is missing.");
 
-				if (sessionCookie) {
-					const token = sessionCookie
-						.split(";")[0]
-						.split("=")
-						.slice(1)
-						.join("=");
-
-					setCookie("session_token", token, {
-						httpOnly: true,
-						secure: true,
-						sameSite: "lax",
-						path: "/",
-						partitioned: true,
-						priority: "high",
-					});
-				}
+				return {
+					success: false,
+					message: "Unable to establish a login session.",
+					statusText: "Session cookie missing",
+				};
 			}
+
+			const token = sessionCookie
+				.split(";")[0]
+				.replace(/^\s*session_token=/i, "")
+				.trim();
+
+			const expiresAt = sessionCookie.match(/(?:^|;)\s*Expires=([^;]+)/i)?.[1];
+
+			const expires = expiresAt ? new Date(expiresAt) : undefined;
+
+			if (!token) {
+				return {
+					success: false,
+					message: "Unable to establish a login session.",
+					statusText: "Invalid session cookie",
+				};
+			}
+
+			setCookie("session_token", token, {
+				httpOnly: true,
+				secure: true,
+				sameSite: "lax",
+				partitioned: true,
+				path: "/",
+				...(expires && !Number.isNaN(expires.getTime()) ? { expires } : {}),
+			});
 
 			return {
 				success: true,
@@ -54,16 +69,18 @@ const login = createServerFn({ method: "POST" })
 			};
 		} catch (error: unknown) {
 			if (axios.isAxiosError(error)) {
-				const res = error.response?.data as
+				const body = error.response?.data as
 					| { message?: string; statusText?: string }
 					| undefined;
 
 				return {
 					success: false,
-					message: res?.message ?? "Unable to sign in.",
-					statusText: res?.statusText ?? "Unauthorized",
+					message: body?.message ?? "Unable to sign in.",
+					statusText: body?.statusText ?? "Unauthorized",
 				};
 			}
+
+			server.error("Login error:", error);
 
 			return {
 				success: false,

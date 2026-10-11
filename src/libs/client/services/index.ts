@@ -1,8 +1,9 @@
-import { login } from "./auth";
+import { login, logout } from "./auth";
 
 const services = {
 	auth: {
 		login,
+		logout,
 	},
 };
 

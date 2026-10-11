@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Settings } from "lucide-react";
+import { LogoutButton } from "#/features/auth/logout";
 import { useSession } from "#/shared/hooks";
 import { styles } from "./styles";
 
@@ -23,6 +24,7 @@ export default function Navbar() {
 						className={styles.profile.avatar()}
 					/>
 				</div>
+				<LogoutButton />
 			</div>
 		</header>
 	);

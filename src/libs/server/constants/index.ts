@@ -20,6 +20,8 @@ const responses = {
 		invalid: "Invalid email or password.",
 		incorrectData: "Invalid data.",
 		registerFailed: "Registration failed.",
+		unauthorized: "Unauthorized.",
+		invalidSession: "Invalid session.",
 	},
 } as const;
 

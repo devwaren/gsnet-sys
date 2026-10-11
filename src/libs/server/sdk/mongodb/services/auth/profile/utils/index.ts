@@ -3,19 +3,27 @@ import { ObjectId } from "mongodb";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
 
 export const profile = createServerOnlyFn(async (cookie: string) => {
-	if (!cookie) return null;
+	if (!cookie) {
+		return Response.json(
+			{ message: "Session token is required." },
+			{ status: 401 },
+		);
+	}
 
 	const session = await collections.sessions.findOne(
 		{ token: cookie },
 		{ userId: 1, expiresAt: 1 },
 	);
 
-	if (!session || session.expiresAt <= new Date()) {
-		return null;
+	if (!session || new Date(session.expiresAt).getTime() <= Date.now()) {
+		return Response.json(
+			{ message: "Session is invalid or expired." },
+			{ status: 401 },
+		);
 	}
 
 	if (!ObjectId.isValid(session.userId)) {
-		return null;
+		return Response.json({ message: "Invalid user ID." }, { status: 400 });
 	}
 
 	const user = await collections.users.findOne(
@@ -28,12 +36,17 @@ export const profile = createServerOnlyFn(async (cookie: string) => {
 		},
 	);
 
-	if (!user) return null;
+	if (!user) {
+		return Response.json({ message: "User not found." }, { status: 404 });
+	}
 
-	return {
-		firstName: user.firstName,
-		lastName: user.lastName,
-		email: user.email,
-		avatar: user.avatar ?? null,
-	};
+	return Response.json(
+		{
+			firstName: user.firstName,
+			lastName: user.lastName,
+			email: user.email,
+			avatar: user.avatar ?? null,
+		},
+		{ status: 200 },
+	);
 });
