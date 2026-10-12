@@ -1,4 +1,5 @@
 import { getAuthorization, login, logout, verifyAdmin } from "./auth";
+import { remove, upload } from "./media";
 
 const services = {
 	auth: {
@@ -6,6 +7,10 @@ const services = {
 		logout,
 		getAuthorization,
 		verifyAdmin,
+	},
+	media: {
+		upload,
+		remove,
 	},
 };
 

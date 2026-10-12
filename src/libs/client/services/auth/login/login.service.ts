@@ -3,19 +3,14 @@ import { setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
 import { httpClient } from "#/libs/client/http";
 import { server } from "#/libs/server/utils";
+import type { HTTPResponse } from "#/libs/shared/types";
 import { validate } from "./validation";
-
-type LoginResponse = {
-	success: boolean;
-	message: string;
-	statusText: string;
-};
 
 const login = createServerFn({ method: "POST" })
 	.validator(validate.login)
-	.handler(async ({ data }): Promise<LoginResponse> => {
+	.handler(async ({ data }): Promise<HTTPResponse> => {
 		try {
-			const res = await httpClient<LoginResponse>({
+			const res = await httpClient<HTTPResponse>({
 				url: "/api/v1/login",
 				method: "POST",
 				data,

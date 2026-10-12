@@ -1,5 +1,3 @@
-// authorization.ts
-
 import { createServerFn } from "@tanstack/react-start";
 import { mongoSDK } from "#/libs/server/sdk/mongodb";
 

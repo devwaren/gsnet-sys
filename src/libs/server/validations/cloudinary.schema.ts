@@ -15,12 +15,20 @@ export const cloudinary = z.object({
 	bytes: z.number().int().nonnegative().optional(),
 });
 
-export const uploadFile = z.string()
-	.min(1, "File is required")
+export const uploadFile = z
+	.custom<File>(
+		(value) => typeof File !== "undefined" && value instanceof File,
+		"File is required",
+	)
+	.refine((file) => file.size > 0, "File cannot be empty")
 	.refine(
-		(value) =>
-			/^https?:\/\/.+/.test(value) ||
-			/^data:[^;]+;base64,[A-Za-z0-9+/]+={0,2}$/.test(value) ||
-			!/^data:/.test(value),
-		"Invalid file format",
+		(file) => file.size <= 10 * 1024 * 1024,
+		"File must be 10 MB or smaller",
+	)
+	.refine(
+		(file) =>
+			["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
+				file.type,
+			),
+		"Unsupported image type",
 	);

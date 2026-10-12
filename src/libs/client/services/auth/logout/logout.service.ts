@@ -3,15 +3,10 @@ import { getCookie, setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
 import { httpClient } from "#/libs/client/http";
 import { server } from "#/libs/server/utils";
-
-type LogoutResponse = {
-	success: boolean;
-	message: string;
-	statusText?: string;
-};
+import type { HTTPResponse } from "#/libs/shared/types";
 
 export const logout = createServerFn({ method: "POST" }).handler(
-	async (): Promise<LogoutResponse> => {
+	async (): Promise<HTTPResponse> => {
 		try {
 			const sessionToken = getCookie("session_token");
 
@@ -23,7 +18,7 @@ export const logout = createServerFn({ method: "POST" }).handler(
 				};
 			}
 
-			const res = await httpClient<LogoutResponse>({
+			const res = await httpClient<HTTPResponse>({
 				url: "/api/v1/logout",
 				method: "DELETE",
 				headers: {

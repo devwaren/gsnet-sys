@@ -8,10 +8,10 @@ export default function DashboardLayout({ className, children }: Props) {
 	return (
 		<main className={className}>
 			<Sidebar />
-			<div className="flex-4 bg-gray-100 min-h-full">
+			<section className="flex-4 bg-gray-100 min-h-full">
 				<Navbar />
 				<div className="p-4">{children}</div>
-			</div>
+			</section>
 		</main>
 	);
 }
