@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
+@utility bg-leaves {
+	background-image: url("/leaf.webp");
+}
+
 @layer base {
 	*,
 	::before,
 	::after {
 		box-sizing: border-box;
 	}
-
-	
 
 	body {
 		margin: 0;

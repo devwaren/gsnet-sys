@@ -1,16 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const form = cva([
-	"w-full",
-	"min-h-80",
-	"rounded-xl",
-	"border border-gray-200",
-	"bg-white",
-	"p-5 sm:p-6 lg:p-8",
-	"shadow-sm",
-	"transition-shadow",
-	"duration-200",
-	"hover:shadow-md",
+	"rounded-3xl border border-white/50 bg-white/85 p-6 shadow-2xl shadow-emerald-950/20 backdrop-blur-xl sm:p-9 min-h-[20em]",
 ]);
 
 const title = {
