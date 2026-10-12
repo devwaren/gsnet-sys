@@ -2,7 +2,7 @@ import { server } from "#/libs/server/utils";
 import { schema } from "#/libs/shared/validations";
 
 const register = (data: unknown) => {
-	const result = schema.register.safeParse(data);
+	const result = schema.auth.register.safeParse(data);
 
 	if (!result.success) {
 		server.log("[validation] Failed", result.error);

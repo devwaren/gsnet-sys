@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { services } from "#/libs/client/services";
 import { middlewares } from "#/libs/server/middlewares";
-import { mongoSDK } from "#/libs/server/sdk/mongodb";
 import { DashboardLayout } from "#/shared/layouts";
 import { styles } from "#/shared/styles";
 
@@ -8,25 +8,13 @@ export const Route = createFileRoute("/dashboard")({
 	component: RouteComponent,
 
 	loader: async () => {
-		const session = await mongoSDK.services.auth.getSession();
+		const authorization = await services.auth.getAuthorization();
 
-		if (!session) {
+		if (!authorization) {
 			throw redirect({ to: "/" });
 		}
 
-		const role = await mongoSDK.services.auth.getRole({ data: session.userId });
-
-		if (role !== "admin") {
-			throw redirect({ to: "/" });
-		}
-
-		const profile = await mongoSDK.services.auth.getProfile();
-
-		if (!profile) {
-			throw redirect({ to: "/" });
-		}
-
-		return { role, profile };
+		return authorization;
 	},
 
 	server: {

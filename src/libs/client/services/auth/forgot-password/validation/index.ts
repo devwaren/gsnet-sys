@@ -1,7 +1,7 @@
 import { schema } from "#/libs/shared/validations";
 
 const email = async (data: unknown) => {
-	const validateData = schema.email.safeParse(data);
+	const validateData = schema.auth.email.safeParse(data);
 
 	if (!validateData.success) {
 		throw new Error("invalid email");

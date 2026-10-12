@@ -1,1 +1,1 @@
-export * from "./getSession";
+export * from "./session.service";

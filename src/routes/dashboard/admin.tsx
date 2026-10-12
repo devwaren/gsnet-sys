@@ -1,10 +1,10 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { services } from "#/libs/client/services";
 import { middlewares } from "#/libs/server/middlewares";
-import { checkAdmin } from "#/libs/server/sdk/mongodb/services/auth/role";
 
 export const Route = createFileRoute("/dashboard/admin")({
 	loader: async () => {
-		const result = await checkAdmin();
+		const result = await services.auth.verifyAdmin();
 
 		if (!result.authorized) {
 			throw redirect({

@@ -1,4 +1,4 @@
-import { LoginForm } from "#/features/auth";
+import { LoginForm } from "#/features/auth/login";
 import { FormBuilder } from "#/shared/components/builder/form";
 import { formFields } from "./constants";
 import { styles } from "./styles";

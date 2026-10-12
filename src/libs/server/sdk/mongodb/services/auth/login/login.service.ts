@@ -60,7 +60,7 @@ export const login = createServerOnlyFn<AuthFn>(async ({ request }) => {
 					"HttpOnly",
 					"SameSite=Lax",
 					`Expires=${sessions.expiresAt.toUTCString()}`,
-					...(process.env.NODE_ENV === "production" ? ["Secure"] : []),
+					`Secure=true`,
 				].join("; "),
 			},
 		},

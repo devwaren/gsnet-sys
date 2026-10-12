@@ -1,11 +1,12 @@
 import {
+	authorization,
 	checkAdmin,
-	getProfile,
-	getRole,
-	getSession,
+	getUserRole,
 	login,
 	logout,
+	profile,
 	register,
+	session,
 } from "./services";
 
 export const mongoSDK = {
@@ -14,10 +15,11 @@ export const mongoSDK = {
 			login,
 			logout,
 			register,
-			getProfile,
-			getSession,
-			getRole,
+			session,
+			profile,
+			getUserRole,
 			checkAdmin,
+			authorization,
 		},
 	},
 };
