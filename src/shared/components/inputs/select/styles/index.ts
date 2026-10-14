@@ -2,9 +2,13 @@ import { cva } from "class-variance-authority";
 
 const container = cva("text-sm");
 
-const selectContainer = cva("px-4 py-2");
+const selectContainer = cva(
+	" w-full cursor-pointer border border-gray-300 rounded-md",
+);
 
-const select = cva("w-full outline-none bg-transparent cursor-pointer");
+const select = cva(
+	"border-0 px-4 py-2 bg-transparent outline-none focus:ring-0 w-full  cursor-pointer",
+);
 
 const error = cva("border px-4 py-2", {
 	variants: {

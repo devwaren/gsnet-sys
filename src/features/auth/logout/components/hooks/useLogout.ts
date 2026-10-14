@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { services } from "#/libs/client/services";
+import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
 import { client } from "#/libs/client/utils";
 
 const useLogout = () => {
@@ -8,7 +8,7 @@ const useLogout = () => {
 
 	return useMutation({
 		mutationKey: ["logout"],
-		mutationFn: services.auth.logout,
+		mutationFn: mongodbSDKClient.services.auth.logout,
 		onSuccess: (data) => {
 			if (!data.success) {
 				client.error({ message: data.message });

@@ -1,2 +1,7 @@
-export * from "./invoice.schema";
-export * from "./payment.schema";
+import { invoice } from "./invoice.schema";
+import { payment } from "./payment.schema";
+
+export const billing = {
+	invoice,
+	payment,
+};

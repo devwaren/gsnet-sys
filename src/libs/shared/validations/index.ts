@@ -1,16 +1,9 @@
-import { email, login, otp, register, resetPassword } from "./auth";
-import { invoice, payment } from "./billing";
+import { auth } from "./auth";
+import { billing } from "./billing";
+import { customer } from "./clients";
 
 export const schema = {
-	auth: {
-		login,
-		register,
-		email,
-		resetPassword,
-		otp,
-	},
-	billing: {
-		invoice,
-		payment,
-	},
+	auth,
+	billing,
+	customer,
 };

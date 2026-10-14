@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const header = cva(
-	"flex w-full items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 py-3",
+	"sticky left-0 top-0 flex w-full items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 py-3",
 );
 
 const details = cva("flex shrink-0 items-center gap-4");

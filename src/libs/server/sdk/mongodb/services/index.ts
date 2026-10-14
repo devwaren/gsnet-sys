@@ -1,7 +1,18 @@
-export { authorization } from "./auth/authorization";
-export { login } from "./auth/login";
-export { logout } from "./auth/logout";
-export { profile } from "./auth/profile";
-export { register } from "./auth/register";
-export { checkAdmin, getUserRole } from "./auth/role";
-export { session } from "./auth/session";
+import { authorization } from "./auth/authorization";
+import { login } from "./auth/login";
+import { logout } from "./auth/logout";
+import { profile } from "./auth/profile";
+import { register } from "./auth/register";
+import { checkAdmin, getUserRole } from "./auth/role";
+import { session } from "./auth/session";
+
+export const auth = {
+	login,
+	logout,
+	register,
+	profile,
+	checkAdmin,
+	getUserRole,
+	session,
+	authorization,
+};

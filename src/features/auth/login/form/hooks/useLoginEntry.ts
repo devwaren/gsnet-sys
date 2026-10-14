@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { services } from "#/libs/client/services";
+import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
 import { client } from "#/libs/client/utils";
 import { useErrorStore } from "#/shared/store/error";
 
@@ -11,7 +11,7 @@ const useLoginEntry = () => {
 
 	return useMutation({
 		mutationKey: ["login"],
-		mutationFn: services.auth.login,
+		mutationFn: mongodbSDKClient.services.auth.login,
 
 		onSuccess: (data) => {
 			if (!data.success) {

@@ -11,7 +11,11 @@ const upload = createServerFn({ method: "POST" })
 			data,
 		});
 
-		return res.data;
+		return {
+			success: res.data.success,
+			message: res.data.message,
+			statusText: res.data.statusText,
+		};
 	});
 
 export { upload };

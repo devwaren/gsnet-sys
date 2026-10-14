@@ -1,6 +1,7 @@
-export type HTTPResponse = {
+export type HTTPResponse<T> = {
 	message: string;
 	statusText: string;
 	status?: number;
-	success?: boolean;
+	success: boolean;
+	data: T[];
 };

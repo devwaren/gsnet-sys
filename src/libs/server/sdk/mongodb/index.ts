@@ -1,25 +1,9 @@
-import {
-	authorization,
-	checkAdmin,
-	getUserRole,
-	login,
-	logout,
-	profile,
-	register,
-	session,
-} from "./services";
+import { auth } from "./services/auth";
+import { clients } from "./services/clients";
 
 export const mongoSDK = {
 	services: {
-		auth: {
-			login,
-			logout,
-			register,
-			session,
-			profile,
-			getUserRole,
-			checkAdmin,
-			authorization,
-		},
+		auth,
+		clients,
 	},
 };

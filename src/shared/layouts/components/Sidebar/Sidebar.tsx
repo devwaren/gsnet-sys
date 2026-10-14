@@ -13,7 +13,7 @@ export default function Sidebar() {
 			initial={{ opacity: 0, x: -8 }}
 			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.35, ease: "easeOut" }}
-			className="sticky top-0 flex h-dvh min-h-dvh flex-col border-r border-gray-200/80 bg-white p-5"
+			className="fixed z-10 lg:sticky top-0 flex h-dvh min-h-dvh flex-col border-r border-gray-200/80 bg-white p-5"
 		>
 			<div className="flex-1 space-y-8">
 				<header className="space-y-2">

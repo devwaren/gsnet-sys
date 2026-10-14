@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { services } from "#/libs/client/services";
+import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
 import { middlewares } from "#/libs/server/middlewares";
 import { DashboardLayout } from "#/shared/layouts";
 import { styles } from "#/shared/styles";
@@ -8,7 +8,8 @@ export const Route = createFileRoute("/dashboard")({
 	component: RouteComponent,
 
 	loader: async () => {
-		const authorization = await services.auth.getAuthorization();
+		const authorization =
+			await mongodbSDKClient.services.auth.getAuthorization();
 
 		if (!authorization) {
 			throw redirect({ to: "/" });

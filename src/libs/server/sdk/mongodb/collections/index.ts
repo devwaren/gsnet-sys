@@ -18,4 +18,8 @@ export const collections = {
 		name: "roles",
 		schema: schemaServer.roles,
 	}),
+	clients: collection({
+		name: "clients",
+		schema: schemaServer.clients,
+	}),
 };
