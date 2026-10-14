@@ -15,15 +15,47 @@ export function disableReactDevTools(
     apply: "build",
     enforce: "pre",
 
-    transform(code, id) {
-      if (!enabled || !id.includes("node_modules/react-dom/")) {
-        return;
-      }
+    transformIndexHtml() {
+      if (!enabled) return;
 
-      return {
-        code,
-        map: null,
-      };
+      return [
+        {
+          tag: "script",
+          attrs: {},
+          children: `
+            (() => {
+              const noop = () => {};
+              const hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+
+              if (hook) {
+                hook.inject = noop;
+                hook.on = noop;
+                hook.off = noop;
+                hook.emit = noop;
+                hook.sub = noop;
+              } else {
+                Object.defineProperty(
+                  window,
+                  "__REACT_DEVTOOLS_GLOBAL_HOOK__",
+                  {
+                    configurable: false,
+                    value: {
+                      isDisabled: true,
+                      supportsFiber: true,
+                      inject: noop,
+                      on: noop,
+                      off: noop,
+                      emit: noop,
+                      sub: noop,
+                    },
+                  },
+                );
+              }
+            })();
+          `,
+          injectTo: "head-prepend",
+        },
+      ];
     },
   };
 }

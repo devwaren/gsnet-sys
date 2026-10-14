@@ -1,7 +1,7 @@
 import { Mapper } from "@dev-waren/react-form-kit";
 import { Link } from "@tanstack/react-router";
 import type { LucideIcon } from "lucide-react";
-
+import { useSidebarStore } from "#/shared/store/sidebar";
 import { styles } from "./styles";
 
 type Items = {
@@ -16,6 +16,8 @@ type Props = {
 };
 
 export default function NavLinks({ links }: Props) {
+	const { closeSidebar } = useSidebarStore();
+
 	return (
 		<Mapper
 			listFor="navigation links"
@@ -30,6 +32,7 @@ export default function NavLinks({ links }: Props) {
 					}}
 					activeOptions={{ exact: item.exact ?? false }}
 					className={styles.links()}
+					onClick={closeSidebar}
 				>
 					<item.icon size={18} />
 					<span>{item.label}</span>

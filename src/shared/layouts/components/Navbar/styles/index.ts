@@ -1,20 +1,20 @@
 import { cva } from "class-variance-authority";
 
 const header = cva(
-	"sticky left-0 top-0 flex w-full items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 py-3",
+	"sticky top-0 z-30 flex w-full items-center justify-between gap-4 border-b border-gray-200 bg-white px-4 py-3 sm:px-6",
 );
 
-const details = cva("flex shrink-0 items-center gap-4");
+const details = cva("flex shrink-0 items-center gap-2 sm:gap-4");
 
 const profile = {
 	container: cva(
-		"size-10 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-50",
+		"size-9 shrink-0 overflow-hidden rounded-full border border-gray-200 bg-gray-50 sm:size-10",
 	),
 	avatar: cva("size-full rounded-full object-cover"),
 };
 
 const settings = cva(
-	"flex items-center justify-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-900",
+	"flex size-9 items-center justify-center rounded-lg text-gray-500 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
 );
 
 export const styles = {

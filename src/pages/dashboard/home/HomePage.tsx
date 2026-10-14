@@ -64,13 +64,15 @@ export default function HomePage() {
 	const { profile } = useSession();
 
 	return (
-		<div className="w-full space-y-4 h-full min-h-full">
+		<div className="h-full min-h-full w-full min-w-0 space-y-4">
 			<Title
 				title="Dashboard"
 				desc={`Welcome back! ${profile.firstName}, Here's an overview of your ISP business.`}
 			/>
-			<div className="grid grid-cols-4 gap-4 h-full min-h-full">
-				<div className="col-span-3 space-y-4">
+
+			<div className="grid h-full min-h-full min-w-0 grid-cols-1 gap-4 lg:grid-cols-4">
+				{/* Main content */}
+				<div className="min-w-0 space-y-4 lg:col-span-3">
 					<Mapper
 						listFor="cards"
 						items={cards}
@@ -78,12 +80,18 @@ export default function HomePage() {
 					>
 						{(item) => <Card item={item} />}
 					</Mapper>
-					<RevenueChart />
-					<div>
+
+					<div className="min-w-0">
+						<RevenueChart />
+					</div>
+
+					<div className="min-w-0">
 						<RecentInvoices />
 					</div>
 				</div>
-				<div className=" w-full max-w-100 space-y-4 grid">
+
+				{/* Sidebar */}
+				<div className="grid min-w-0 grid-cols-1 content-start gap-4 sm:grid-cols-2 lg:col-span-1 lg:grid-cols-1">
 					<SubscriberDistribution />
 					<QuickActions />
 					<OverdueAccounts />

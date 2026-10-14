@@ -46,17 +46,17 @@ export const links = [
 
 export const adminLinks = [
 	{
-		label: "Users",
+		label: "Manage Users",
 		link: "/dashboard/admin/users",
 		icon: Users2,
 	},
 	{
-		label: "Plans",
+		label: "Internet Plans",
 		link: "/dashboard/admin/plans",
 		icon: PaperBag,
 	},
 	{
-		label: "Clients",
+		label: "Client Records",
 		link: "/dashboard/admin/clients",
 		icon: UserSquare,
 	},

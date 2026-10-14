@@ -1,4 +1,4 @@
-import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+import { ReactDevToolsDisabler } from "@dev-waren/react-devtool-disabler";
 import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
@@ -31,16 +31,14 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 type Props = ComponentProps<"html">;
 
 function RootDocument({ children }: Props) {
-	if (process.env.NODE_ENV === "production") {
-		disableReactDevTools();
-	}
-
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
 			<body className={styles.root()}>
+				<ReactDevToolsDisabler />
+
 				{children}
 				<Scripts />
 			</body>
