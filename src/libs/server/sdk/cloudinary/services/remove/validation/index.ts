@@ -1,4 +1,4 @@
-import { schemaServer } from "#/libs/server/validations";
+import { schemaServer } from "#/libs/server/schema";
 
 const publicId = async (data: unknown) => {
 	const result = schemaServer.cloudinary.shape.publicId.safeParse(data);

@@ -8,6 +8,7 @@ import { schema } from "#/libs/shared/validations";
 export const add = createServerOnlyFn(
 	async ({ request }: { request: Request }) => {
 		const body = await request.json();
+
 		const result = schema.customer.client.safeParse(body);
 
 		if (!result.success) return invalid();

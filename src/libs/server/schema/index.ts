@@ -1,6 +1,7 @@
 import { accounts } from "./accounts.schema";
 import { clients } from "./clients.schema";
 import { cloudinary, uploadFile } from "./cloudinary.schema";
+import { csrf } from "./csrf.schema";
 import { jwt } from "./jwt.schema";
 import { roles } from "./roles.schema";
 import { sessions } from "./sessions.schema";
@@ -15,4 +16,5 @@ export const schemaServer = {
 	cloudinary,
 	uploadFile,
 	clients,
+	csrf,
 };

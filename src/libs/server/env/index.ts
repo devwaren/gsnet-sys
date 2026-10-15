@@ -8,6 +8,7 @@ export const env = {
 			jwt: setEnv("JWT_SECRET"),
 			zeroDay: setEnv("ZERODAY_SECRET"),
 			internal: setEnv("INTERNAL_HMAC_SECRET"),
+			csrf: setEnv("CSRF_SECRET"),
 		},
 		isProd: setEnv("NODE_ENV") === "production",
 	},

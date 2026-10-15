@@ -1,9 +1,18 @@
-import { setEnv } from "@dev-waren/mongodb";
-import { createCsrfMiddleware } from "@tanstack/react-start";
+import { createMiddleware } from "@tanstack/react-start";
+import { mongoSDK } from "#/libs/server/sdk/mongodb";
 
-const csrf = createCsrfMiddleware({
-	filter: (ctx) => ctx.handlerType === "serverFn",
-	origin: setEnv("BASE_URL"),
+const csrf = createMiddleware().server(async ({ request, next }) => {
+	if (request.method !== "POST") {
+		return next();
+	}
+
+	const nextToken = await mongoSDK.services.auth.csrf({ request });
+
+	return next({
+		context: {
+			csrfToken: nextToken,
+		},
+	});
 });
 
 export { csrf };

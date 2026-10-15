@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getCookie } from "@tanstack/react-start/server";
 import { isAxiosError } from "axios";
 import { httpClient } from "#/libs/client/http";
 import type { HTTPResponse } from "#/libs/shared/types";
@@ -7,10 +8,23 @@ import { validate } from "./validation";
 export const add = createServerFn({ method: "POST" })
 	.validator(validate.addClient)
 	.handler(async ({ data }) => {
+		const sessionToken = getCookie("session_token");
+
+		if (!sessionToken) {
+			return {
+				success: false,
+				message: "Session token is missing.",
+				statusText: "Unauthorized",
+			};
+		}
+
 		try {
 			const res = await httpClient<HTTPResponse<{ data: unknown }>>({
 				url: "/api/v1/clients",
 				method: "POST",
+				headers: {
+					Cookie: `session_token=${sessionToken}`,
+				},
 				data,
 			});
 
@@ -23,8 +37,9 @@ export const add = createServerFn({ method: "POST" })
 			if (isAxiosError<HTTPResponse<{ data: unknown }>>(error)) {
 				return {
 					success: false,
-					message: error.response?.data.message,
-					statusText: error.response?.data?.statusText,
+					message: error.response?.data.message ?? "Request failed.",
+					statusText:
+						error.response?.data?.statusText ?? "Internal Server Error",
 				};
 			}
 

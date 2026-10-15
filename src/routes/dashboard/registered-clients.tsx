@@ -5,7 +5,9 @@ import { RegisteredClientPage } from "#/pages/dashboard/clients";
 export const Route = createFileRoute("/dashboard/registered-clients")({
 	component: RouteComponent,
 
-	loader: ({ context }) => context.queryClient.query(queries.client.get),
+	loader: async ({ context }) => {
+		await context.queryClient.query(queries.client.get);
+	},
 });
 
 function RouteComponent() {

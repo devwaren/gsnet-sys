@@ -1,4 +1,4 @@
-import { schemaServer } from "#/libs/server/validations";
+import { schemaServer } from "#/libs/server/schema";
 
 const jwt = async (data: unknown) => {
 	const result = schemaServer.jwt.safeParse(data);

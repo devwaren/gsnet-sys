@@ -5,7 +5,7 @@ import { invalid } from "#/libs/server/res";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
 import type { AuthFn } from "#/libs/server/types";
 import { unauthorizedlogin } from "./res";
-import { session } from "./utils";
+import { genCSRF, session } from "./utils";
 import { validate } from "./validation";
 
 export const login = createServerOnlyFn<AuthFn>(async ({ request }) => {
@@ -45,6 +45,8 @@ export const login = createServerOnlyFn<AuthFn>(async ({ request }) => {
 		userId: user._id.toString(),
 	});
 
+	await genCSRF(user._id);
+
 	return Response.json(
 		{
 			message: http.responses.messages.loggedIn,
@@ -60,7 +62,7 @@ export const login = createServerOnlyFn<AuthFn>(async ({ request }) => {
 					"HttpOnly",
 					"SameSite=Lax",
 					`Expires=${sessions.expiresAt.toUTCString()}`,
-					`Secure=true`,
+					"Secure",
 				].join("; "),
 			},
 		},

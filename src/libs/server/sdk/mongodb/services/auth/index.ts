@@ -1,4 +1,5 @@
 import { authorization } from "./authorization";
+import { csrf } from "./csrf";
 import { login } from "./login";
 import { logout } from "./logout";
 import { profile } from "./profile";
@@ -15,4 +16,5 @@ export const auth = {
 	getUserRole,
 	session,
 	authorization,
+	csrf,
 };

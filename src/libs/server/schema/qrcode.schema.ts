@@ -9,7 +9,5 @@ export const qrcode = z.object({
 		.transform(sanitize)
 		.nullable()
 		.default(null),
-	expiresAt: z.date().nullable().default(null),
-	enabledAt: z.date().nullable().default(null),
 	updatedAt: z.date().default(() => new Date()),
 });

@@ -1,4 +1,4 @@
-import { schemaServer } from "#/libs/server/validations";
+import { schemaServer } from "#/libs/server/schema";
 import { collection } from "../config";
 
 export const collections = {
@@ -21,5 +21,9 @@ export const collections = {
 	clients: collection({
 		name: "clients",
 		schema: schemaServer.clients,
+	}),
+	tokens: collection({
+		name: "tokens",
+		schema: schemaServer.csrf,
 	}),
 };

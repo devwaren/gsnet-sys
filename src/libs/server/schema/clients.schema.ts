@@ -98,6 +98,4 @@ export const clients = z.object({
 
 	address,
 	installation,
-	created_at: z.date().optional(),
-	updated_at: z.date().optional(),
 });
