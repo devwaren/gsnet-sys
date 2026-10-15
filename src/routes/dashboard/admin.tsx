@@ -14,6 +14,6 @@ export const Route = createFileRoute("/dashboard/admin")({
 	},
 	component: () => <Outlet />,
 	server: {
-		middleware: [middlewares.role],
+		middleware: [middlewares.role, middlewares.authorization],
 	},
 });

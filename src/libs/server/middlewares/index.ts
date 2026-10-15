@@ -1,4 +1,4 @@
-import { auth, publicRoute, role } from "./auth";
+import { auth, authorization, publicRoute, role } from "./auth";
 import { csrf } from "./csrf";
 import { internal } from "./internal";
 
@@ -8,4 +8,5 @@ export const middlewares = {
 	auth,
 	publicRoute,
 	role,
+	authorization,
 };

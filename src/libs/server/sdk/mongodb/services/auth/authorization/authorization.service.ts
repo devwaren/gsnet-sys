@@ -3,19 +3,25 @@ import { decryptUserId } from "#/libs/server/gen/tokens";
 import { mongoSDK } from "#/libs/server/sdk/mongodb";
 
 export const authorization = createServerOnlyFn(async () => {
-	const session = await mongoSDK.services.auth.session();
+	try {
+		const session = await mongoSDK.services.auth.session();
 
-	if (!session) return null;
+		if (!session) return null;
 
-	const userId = decryptUserId(session.hashSnake);
+		const userId = decryptUserId(session.hashSnake);
 
-	const role = await mongoSDK.services.auth.getUserRole(userId);
+		const role = await mongoSDK.services.auth.getUserRole(userId);
 
-	if (role !== "admin") return null;
+		if (role !== "user" && role !== "admin" && role !== "superadmin") {
+			return null;
+		}
 
-	const profile = await mongoSDK.services.auth.profile();
+		const profile = await mongoSDK.services.auth.profile();
 
-	if (!profile) return null;
+		if (!profile) return null;
 
-	return { role, profile };
+		return { role, profile };
+	} catch {
+		return null;
+	}
 });

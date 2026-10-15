@@ -12,6 +12,7 @@ export const session = createServerOnlyFn(async () => {
 			sameSite: "lax",
 			path: "/",
 			maxAge: 0,
+			expires: new Date(0),
 		});
 	};
 
@@ -24,7 +25,7 @@ export const session = createServerOnlyFn(async () => {
 		{ userId: 1, expiresAt: 1 },
 	);
 
-	if (!currentSession?.expiresAt) {
+	if (!currentSession) {
 		clearSessionCookie();
 		return null;
 	}
@@ -35,6 +36,7 @@ export const session = createServerOnlyFn(async () => {
 		!Number.isFinite(expiresAt.getTime()) ||
 		expiresAt.getTime() <= Date.now()
 	) {
+		await collections.sessions.deleteOne({ token: sessionToken });
 		clearSessionCookie();
 		return null;
 	}
@@ -42,6 +44,7 @@ export const session = createServerOnlyFn(async () => {
 	const userId = currentSession.userId?.toString();
 
 	if (!userId || !ObjectId.isValid(userId)) {
+		await collections.sessions.deleteOne({ token: sessionToken });
 		clearSessionCookie();
 		return null;
 	}
@@ -52,6 +55,7 @@ export const session = createServerOnlyFn(async () => {
 	);
 
 	if (!user) {
+		await collections.sessions.deleteOne({ token: sessionToken });
 		clearSessionCookie();
 		return null;
 	}
