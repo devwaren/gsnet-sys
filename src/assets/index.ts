@@ -1,4 +1,4 @@
-import leaves from "./sprite/leaf-bg.png";
+import leaves from "./sprite/gsnet.webp";
 
 export const assets = {
 	bg: {

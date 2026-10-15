@@ -1,3 +1,4 @@
+import { admin } from "./admin";
 import { auth } from "./auth";
 import { billing } from "./billing";
 import { customer } from "./clients";
@@ -8,4 +9,5 @@ export const schema = {
 	billing,
 	customer,
 	internetPlan,
+	admin,
 };

@@ -1,6 +1,7 @@
 import {
 	Coins,
 	DollarSign,
+	KeySquare,
 	LayoutDashboard,
 	Newspaper,
 	PaperBag,
@@ -59,5 +60,10 @@ export const adminLinks = [
 		label: "Client Records",
 		link: "/dashboard/admin/clients",
 		icon: UserSquare,
+	},
+	{
+		label: "Create Invite Token",
+		link: "/dashboard/admin/tokens",
+		icon: KeySquare,
 	},
 ];

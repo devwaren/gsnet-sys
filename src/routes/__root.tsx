@@ -23,7 +23,14 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 			},
 			{ title: "GS Internet Sys" },
 		],
-		links: [{ rel: "stylesheet", href: appCss }],
+		links: [
+			{ rel: "stylesheet", href: appCss },
+			{
+				rel: "icon",
+				type: "image/webp",
+				href: "/gsnet.webp",
+			},
+		],
 	}),
 	shellComponent: RootDocument,
 });
@@ -38,7 +45,6 @@ function RootDocument({ children }: Props) {
 			</head>
 			<body className={styles.root()}>
 				<ReactDevToolsDisabler />
-
 				{children}
 				<Scripts />
 			</body>
