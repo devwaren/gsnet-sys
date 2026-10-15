@@ -7,10 +7,13 @@ export const profile = createServerOnlyFn(async () => {
 	const clearSessionCookie = () => {
 		setCookie("session_token", "", {
 			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
+			secure: true,
 			sameSite: "lax",
 			path: "/",
+			expires: new Date(0),
 			maxAge: 0,
+			priority: "high",
+			partitioned: true,
 		});
 	};
 

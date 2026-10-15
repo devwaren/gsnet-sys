@@ -3,6 +3,19 @@ import { setCookie } from "@tanstack/react-start/server";
 import { ObjectId } from "mongodb";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
 
+const clearSessionCookie = () => {
+	setCookie("session_token", "", {
+		httpOnly: true,
+		secure: true,
+		sameSite: "lax",
+		path: "/",
+		maxAge: 0,
+		expires: new Date(0),
+		priority: "high",
+		partitioned: true,
+	});
+};
+
 const logout = createServerOnlyFn(async ({ request }: { request: Request }) => {
 	const cookieHeader = request.headers.get("cookie");
 
@@ -55,15 +68,7 @@ const logout = createServerOnlyFn(async ({ request }: { request: Request }) => {
 		token: sessionToken,
 	});
 
-	setCookie("session_token", "", {
-		httpOnly: true,
-		secure: true,
-		sameSite: "lax",
-		partitioned: true,
-		path: "/",
-		maxAge: 0,
-		priority: "high",
-	});
+	clearSessionCookie();
 
 	return Response.json({
 		success: true,

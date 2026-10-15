@@ -1,26 +1,28 @@
 import { envClient } from "#/libs/client/env";
 
+const logs = "[client]";
+
 const log = (...args: unknown[]) => {
 	if (!envClient.browser.isProd) {
-		console.log(...args);
+		console.log(logs, ...args);
 	}
 };
 
 const info = (...args: unknown[]) => {
 	if (!envClient.browser.isProd) {
-		console.info(...args);
+		console.info(logs, ...args);
 	}
 };
 
 const warn = (...args: unknown[]) => {
 	if (!envClient.browser.isProd) {
-		console.warn(...args);
+		console.warn(logs, ...args);
 	}
 };
 
 const error = (...args: unknown[]) => {
 	if (!envClient.browser.isProd) {
-		console.error(...args);
+		console.error(logs, ...args);
 	}
 };
 
