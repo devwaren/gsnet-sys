@@ -3,7 +3,11 @@ import { jwt } from "./jwt.schema";
 
 const register = z
 	.object({
-		registrationToken: jwt,
+		token: jwt,
+		username: z
+			.string()
+			.min(8, { message: "username must be atleast 8 characters long" })
+			.transform(sanitize),
 		firstName: z
 			.string()
 			.min(2, { message: "firstname is required." })
@@ -13,8 +17,7 @@ const register = z
 			.min(2, { message: "surname is required." })
 			.transform(sanitize),
 		email: z.string().email({ message: "email is required." }),
-		address: z.string().transform(sanitize),
-		avatar: z.string().transform(sanitize).optional(),
+		avatar: z.string().optional().default(""),
 		password: z
 			.string()
 			.min(8, { message: "password must be atleast 8 characters long." })

@@ -11,15 +11,18 @@ const useRegisterForm = () => {
 	const form = useFormSettings({
 		schema: schema.auth.register,
 		defaultValues: {
+			token: "",
 			firstName: "",
 			lastName: "",
 			email: "",
-			address: "",
+			username: "",
 			password: "",
 			confirmPassword: "",
+			avatar: "none",
 		},
 		onSubmit: (data) => {
-			client.log(data);
+			client.log("validate success.");
+			mutation.mutate({ data });
 		},
 	});
 

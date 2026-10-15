@@ -7,6 +7,11 @@ const httpClient = <T = unknown>(config: AxiosRequestConfig) => {
 		...config,
 		baseURL: env.server.url,
 		withCredentials: true,
+		headers: {
+			...config.headers,
+			"Cache-Control": "no-store, no-cache, must-revalidate",
+			Pragma: "no-cache",
+		},
 	});
 };
 

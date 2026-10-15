@@ -75,6 +75,7 @@ export const getJWT = createServerOnlyFn(async () => {
 		{
 			success: true,
 			message: "successfully retrieve the token.",
+			statusText: http.responses.status[200],
 			token,
 		},
 		{

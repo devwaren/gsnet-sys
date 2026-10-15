@@ -7,9 +7,9 @@ import { collections } from "#/libs/server/sdk/mongodb/collections";
 
 const userIdSchema = z.string().trim().min(1).transform(sanitize);
 
-export type UserRole = "user" | "admin";
+export type UserRole = "user" | "admin" | "staff";
 
-const userRoleSchema = z.enum(["user", "admin"]);
+const userRoleSchema = z.enum(["user", "admin", "staff"]);
 
 export const getUserRole = createServerOnlyFn(
 	async (userId: string): Promise<UserRole | null> => {

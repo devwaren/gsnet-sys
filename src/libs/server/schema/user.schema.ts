@@ -14,9 +14,5 @@ export const user = z.object({
 
 	email: z.string().email({ message: "email is required." }),
 
-	avatar: z
-		.string()
-		.min(1, { message: "avatar url is required" })
-		.transform(sanitize)
-		.optional(),
+	avatar: z.string().transform(sanitize).optional(),
 });

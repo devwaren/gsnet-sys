@@ -12,9 +12,7 @@ export const authorization = createServerOnlyFn(async () => {
 
 		const role = await mongoSDK.services.auth.getUserRole(userId);
 
-		if (role !== "user" && role !== "admin" && role !== "staff") {
-			return null;
-		}
+		if (!role) return null;
 
 		const profile = await mongoSDK.services.auth.profile();
 
