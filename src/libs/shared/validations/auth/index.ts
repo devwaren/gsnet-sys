@@ -1,4 +1,5 @@
 import { email } from "./email.schema";
+import { jwt } from "./jwt.schema";
 import { login } from "./login.schema";
 import { otp } from "./otp.schema";
 import { register } from "./register.schema";
@@ -10,4 +11,5 @@ export const auth = {
 	email,
 	resetPassword,
 	otp,
+	jwt,
 };

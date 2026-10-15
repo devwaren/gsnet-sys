@@ -2,6 +2,7 @@ import { sanitize, z } from "@dev-waren/react-form-kit";
 
 const register = z
 	.object({
+		
 		firstName: z
 			.string()
 			.min(2, { message: "firstname is required." })

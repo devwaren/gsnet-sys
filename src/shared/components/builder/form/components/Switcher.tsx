@@ -1,6 +1,7 @@
 import {
 	Checkbox,
 	Input,
+	InputGen,
 	Radio,
 	Select,
 	Textarea,
@@ -17,6 +18,9 @@ export function Switcher(field: FormField) {
 
 		case "checkbox":
 			return <Checkbox {...field} />;
+
+		case "inputgen":
+			return <InputGen {...field} />;
 
 		case "radio":
 			return <Radio {...field} />;

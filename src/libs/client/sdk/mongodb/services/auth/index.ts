@@ -3,6 +3,7 @@ import { login } from "./login";
 import { logout } from "./logout";
 import { profile } from "./profile";
 import { verifyAdmin } from "./role";
+import { setRole } from "./setRole";
 
 export const auth = {
 	login,
@@ -10,4 +11,5 @@ export const auth = {
 	profile,
 	verifyAdmin,
 	getAuthorization,
+	setRole,
 };

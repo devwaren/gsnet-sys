@@ -1,7 +1,8 @@
 import { pppoeId } from "./pppoeId";
-import { internalToken } from "./tokens";
+import { internalToken, signJWT } from "./tokens";
 
 export const gen = {
 	internalToken,
 	pppoeId,
+	signJWT,
 };

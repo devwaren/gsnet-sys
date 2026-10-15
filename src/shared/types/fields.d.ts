@@ -8,9 +8,11 @@ export type FormField = {
 		| "email"
 		| "password"
 		| "text"
+		| "inputgen"
 		| "date";
 	placeholder?: string;
 	className?: string;
+	disabled?: boolean;
 	items?: {
 		label: string;
 		value: string;

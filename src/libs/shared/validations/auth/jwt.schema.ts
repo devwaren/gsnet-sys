@@ -1,4 +1,4 @@
-import { z } from "@dev-waren/mongodb";
+import { z } from "@dev-waren/react-form-kit";
 
 export const jwt = z
 	.string()

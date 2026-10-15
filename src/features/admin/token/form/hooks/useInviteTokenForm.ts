@@ -1,8 +1,11 @@
 import { useFormSettings } from "@dev-waren/react-form-kit/hook-form";
 import { client } from "#/libs/client/utils";
 import { schema } from "#/libs/shared/validations";
+import { useInviteTokenEntry } from "./useInviteTokenEntry";
 
 const useInviteTokenForm = () => {
+	const mutation = useInviteTokenEntry();
+
 	return useFormSettings({
 		schema: schema.admin.token,
 		defaultValues: {
@@ -10,8 +13,9 @@ const useInviteTokenForm = () => {
 			token: "",
 		},
 		clearFields: ["email", "token"],
-		onSubmit: () => {
-			client.log("validation passed.");
+		onSubmit: (data) => {
+			client.log("validation passed.", data);
+			mutation.mutate({ data });
 		},
 	});
 };

@@ -1,5 +1,5 @@
 import { createMiddleware } from "@tanstack/react-start";
-// import { mongoSDK } from "#/libs/server/sdk/mongodb";
+import { mongoSDK } from "#/libs/server/sdk/mongodb";
 
 export const authorization = createMiddleware().server(
 	async ({ request, next }) => {
@@ -7,7 +7,7 @@ export const authorization = createMiddleware().server(
 			return next();
 		}
 
-		// await mongoSDK.services.auth.checkAdmin();
+		await mongoSDK.services.auth.checkAdmin();
 
 		return next();
 	},
