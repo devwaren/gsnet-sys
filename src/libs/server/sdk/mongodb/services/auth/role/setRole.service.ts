@@ -69,7 +69,7 @@ export const setRole = createServerOnlyFn(async ({ request }) => {
 
 	if (!result.success) return invalid();
 
-	const checkEmail = await collections.accounts.findOne(
+	const checkEmail = await collections.registration.findOne(
 		{
 			email,
 		},

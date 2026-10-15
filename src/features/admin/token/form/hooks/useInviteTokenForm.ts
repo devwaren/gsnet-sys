@@ -14,7 +14,7 @@ const useInviteTokenForm = () => {
 		},
 		clearFields: ["email", "token"],
 		onSubmit: (data) => {
-			client.log("validation passed.", data);
+			client.log("validation passed.");
 			mutation.mutate({ data });
 		},
 	});

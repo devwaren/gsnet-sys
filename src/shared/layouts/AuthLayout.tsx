@@ -29,6 +29,9 @@ export default function AuthLayout({ children, className, ...props }: Props) {
 					Grounded in simplicity. Designed for you.
 				</p>
 			</div>
+			<div className="absolute left-4 bottom-4 z-1 text-sm text-gray-600">
+				<p>GS Internet Sys v 1.0.3-Beta</p>
+			</div>
 		</main>
 	);
 }

@@ -2,9 +2,12 @@ import { InviteTokenForm } from "#/features/admin/token";
 import { FormBuilder } from "#/shared/components/builder/form";
 import { SubmitButton } from "#/shared/components/buttons";
 import { Title } from "#/shared/components/ui/dashboard";
+import { useMessageStore } from "#/shared/store/message";
 import { fields } from "./constants";
 
 export default function CreateTokenPage() {
+	const { message } = useMessageStore();
+
 	return (
 		<div className="min-h-full space-y-6 bg-gray-50 p-4 sm:p-6 lg:p-8">
 			<Title
@@ -28,6 +31,8 @@ export default function CreateTokenPage() {
 					<div className="flex justify-end border-t border-gray-100 pt-4">
 						<SubmitButton loadinglabel="Submitting" label="Create Token" />
 					</div>
+
+					{message && <p className="text-green-600 py-2">{message}</p>}
 				</InviteTokenForm>
 			</div>
 		</div>

@@ -1,8 +1,9 @@
 import { sanitize, z } from "@dev-waren/react-form-kit";
+import { jwt } from "./jwt.schema";
 
 const register = z
 	.object({
-		
+		registrationToken: jwt,
 		firstName: z
 			.string()
 			.min(2, { message: "firstname is required." })
@@ -13,6 +14,7 @@ const register = z
 			.transform(sanitize),
 		email: z.string().email({ message: "email is required." }),
 		address: z.string().transform(sanitize),
+		avatar: z.string().transform(sanitize).optional(),
 		password: z
 			.string()
 			.min(8, { message: "password must be atleast 8 characters long." })
