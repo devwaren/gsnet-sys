@@ -1,7 +1,7 @@
 import type { z } from "@dev-waren/mongodb";
 import { createServerFn } from "@tanstack/react-start";
 import { isAxiosError } from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import type { HTTPResponse } from "#/libs/shared/types";
 import type { schema } from "#/libs/shared/validations";
 
@@ -9,7 +9,7 @@ type Customer = z.infer<typeof schema.customer.client>;
 
 export const get = createServerFn({ method: "GET" }).handler(async () => {
 	try {
-		const res = await httpClient<HTTPResponse<Customer>>({
+		const res = await httpServer<HTTPResponse<Customer>>({
 			url: "/api/v1/clients",
 			method: "GET",
 		});

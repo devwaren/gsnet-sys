@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import axios from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import type { HTTPResponse } from "#/libs/shared/types";
 import { validate } from "./validation";
 
@@ -8,7 +8,7 @@ const register = createServerFn({ method: "POST" })
 	.validator(validate.register)
 	.handler(async ({ data }) => {
 		try {
-			const res = await httpClient<HTTPResponse>({
+			const res = await httpServer<HTTPResponse>({
 				url: "/api/v1/register",
 				method: "POST",
 				data,

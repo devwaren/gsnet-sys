@@ -1,11 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import { validate } from "./validation";
 
 const forgotPassword = createServerFn({ method: "POST" })
 	.validator(validate.email)
 	.handler(async ({ data }) => {
-		const res = await httpClient({
+		const res = await httpServer({
 			url: "/api/v1/forgot-password",
 			data,
 		});

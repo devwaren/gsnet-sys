@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import { server } from "#/libs/server/utils";
 import type { HTTPResponse } from "#/libs/shared/types";
 import { validate } from "./validation";
@@ -10,7 +10,7 @@ const login = createServerFn({ method: "POST" })
 	.validator(validate.login)
 	.handler(async ({ data }): Promise<HTTPResponse> => {
 		try {
-			const res = await httpClient<HTTPResponse>({
+			const res = await httpServer<HTTPResponse>({
 				url: "/api/v1/login",
 				method: "POST",
 				data,

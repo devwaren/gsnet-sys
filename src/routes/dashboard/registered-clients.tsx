@@ -6,7 +6,7 @@ export const Route = createFileRoute("/dashboard/registered-clients")({
 	component: RouteComponent,
 
 	loader: async ({ context }) => {
-		await context.queryClient.query(queries.client.get);
+		return context.queryClient.ensureQueryData(queries.client.get);
 	},
 });
 

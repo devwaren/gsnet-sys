@@ -8,7 +8,7 @@ type HttpServerConfig = AxiosRequestConfig & {
 	request?: Request;
 };
 
-const httpServer = createServerOnlyFn(
+export const serverOnly = createServerOnlyFn(
 	async <T = unknown>(config: HttpServerConfig): Promise<AxiosResponse<T>> => {
 		const controller = new AbortController();
 
@@ -64,5 +64,3 @@ const httpServer = createServerOnlyFn(
 		}
 	},
 );
-
-export { httpServer };

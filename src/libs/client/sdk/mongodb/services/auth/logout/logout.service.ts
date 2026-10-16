@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie, setCookie } from "@tanstack/react-start/server";
 import axios from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import { server } from "#/libs/server/utils";
 import type { HTTPResponse } from "#/libs/shared/types";
 
@@ -18,7 +18,7 @@ export const logout = createServerFn({ method: "POST" }).handler(
 				};
 			}
 
-			const res = await httpClient<HTTPResponse>({
+			const res = await httpServer<HTTPResponse>({
 				url: "/api/v1/logout",
 				method: "DELETE",
 				headers: {

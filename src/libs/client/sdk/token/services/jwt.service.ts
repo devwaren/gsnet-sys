@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 import axios from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import { server } from "#/libs/server/utils";
 import type { TokenResponse, TokenResult } from "./types";
 
@@ -18,7 +18,7 @@ export const getJWT = createServerFn({ method: "GET" }).handler(
 		}
 
 		try {
-			const res = await httpClient<TokenResponse>({
+			const res = await httpServer<TokenResponse>({
 				url: "/api/v1/token",
 				method: "GET",
 				headers: {

@@ -1,9 +1,12 @@
 import { Camera, LockKeyhole, UserRound } from "lucide-react";
+import { useState } from "react";
+import { UploadImageModal } from "#/shared/components/modals/users";
 import { Title } from "#/shared/components/ui/dashboard";
 import { useSession } from "#/shared/hooks";
 
 export default function SettingsPage() {
 	const { profile, role } = useSession();
+	const [isOpen, setIsOpen] = useState(false);
 
 	const roleSet = role === "admin" ? "Administrator" : "Staff";
 
@@ -51,6 +54,7 @@ export default function SettingsPage() {
 							<button
 								type="button"
 								aria-label="Change profile picture"
+								onClick={() => setIsOpen(true)}
 								className="absolute bottom-0 right-0 grid size-8 place-items-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50"
 							>
 								<Camera size={15} />
@@ -124,6 +128,7 @@ export default function SettingsPage() {
 					</div>
 				</section>
 			</div>
+			{isOpen && <UploadImageModal />}
 		</div>
 	);
 }

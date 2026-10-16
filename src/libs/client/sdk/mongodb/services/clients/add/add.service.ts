@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { isAxiosError } from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import type { HTTPResponse } from "#/libs/shared/types";
 import { validate } from "./validation";
 
@@ -19,7 +19,7 @@ export const add = createServerFn({ method: "POST" })
 		}
 
 		try {
-			const res = await httpClient<HTTPResponse<{ data: unknown }>>({
+			const res = await httpServer<HTTPResponse<{ data: unknown }>>({
 				url: "/api/v1/clients",
 				method: "POST",
 				headers: {

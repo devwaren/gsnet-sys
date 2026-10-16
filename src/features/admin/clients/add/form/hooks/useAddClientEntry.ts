@@ -1,11 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { queries } from "#/libs/client/queries";
 import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
 import { client } from "#/libs/client/utils";
 import { useErrorStore } from "#/shared/store/error";
 
 const useAddClientEntry = () => {
-	const queryClient = useQueryClient();
 	const { setError } = useErrorStore();
+
+	const { refetch } = useQuery(queries.client.get);
 
 	return useMutation({
 		mutationKey: ["add-client"],
@@ -19,12 +21,11 @@ const useAddClientEntry = () => {
 
 			client.log("[ADD CLIENT] Success:", data.success);
 
-			await queryClient.invalidateQueries({
-				queryKey: ["registered-client"],
-				exact: true,
-			});
+			if (data.success) refetch();
+		},
 
-			client.log({ message: data.message });
+		onError: (error) => {
+			setError(error.message);
 		},
 	});
 };

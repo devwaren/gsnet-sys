@@ -16,3 +16,4 @@ src/gen
 agents.md
 package-lock.json
 *.txt
+*.bak

@@ -15,20 +15,32 @@ export const cloudinary = z.object({
 	bytes: z.number().int().nonnegative().optional(),
 });
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+const ACCEPTED_IMAGE_TYPES = [
+	"image/jpeg",
+	"image/png",
+	"image/webp",
+	"image/gif",
+];
+
 export const uploadFile = z
 	.custom<File>(
-		(value) => typeof File !== "undefined" && value instanceof File,
-		"File is required",
+		(value): value is File =>
+			value !== null &&
+			typeof value === "object" &&
+			typeof (value as File).name === "string" &&
+			typeof (value as File).size === "number" &&
+			typeof (value as File).type === "string" &&
+			typeof (value as File).arrayBuffer === "function",
+		{ message: "A valid file is required." },
 	)
-	.refine((file) => file.size > 0, "File cannot be empty")
-	.refine(
-		(file) => file.size <= 10 * 1024 * 1024,
-		"File must be 10 MB or smaller",
-	)
-	.refine(
-		(file) =>
-			["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
-				file.type,
-			),
-		"Unsupported image type",
-	);
+	.refine((file) => file.size > 0, {
+		message: "File cannot be empty.",
+	})
+	.refine((file) => file.size <= MAX_FILE_SIZE, {
+		message: "File must be 5 MB or smaller.",
+	})
+	.refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+		message: "Unsupported image type.",
+	});

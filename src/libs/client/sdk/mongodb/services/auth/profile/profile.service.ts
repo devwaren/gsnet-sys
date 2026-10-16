@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie, setCookie } from "@tanstack/react-start/server";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import { invalid } from "#/libs/server/res";
 import { validate } from "./validation";
 
@@ -27,7 +27,7 @@ export const profile = createServerFn({ method: "GET" }).handler(async () => {
 
 	if (!result) return invalid();
 
-	const res = await httpClient({
+	const res = await httpServer({
 		url: "/api/v1/profile",
 		method: "GET",
 		headers: {

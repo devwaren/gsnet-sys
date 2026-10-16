@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 import axios from "axios";
-import { httpClient } from "#/libs/client/http";
+import { httpServer } from "#/libs/server/http";
 import type { HTTPResponse } from "#/libs/shared/types";
 import { validate } from "./validation";
 
@@ -11,7 +11,7 @@ export const setRole = createServerFn({ method: "POST" })
 		const sessionCookie = getCookie("session_token");
 
 		try {
-			const res = await httpClient<HTTPResponse>({
+			const res = await httpServer<HTTPResponse>({
 				url: "/api/v1/users/role",
 				method: "POST",
 				headers: {
