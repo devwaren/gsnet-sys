@@ -1,33 +1,28 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
 import { queries } from "#/libs/client/queries";
 import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
-import { client } from "#/libs/client/utils";
-import { useErrorStore } from "#/shared/store/error";
 
-const useAddClientEntry = () => {
-	const { setError } = useErrorStore();
+export const useAddClientEntry = () => {
+	const router = useRouter();
 
-	const { refetch } = useQuery(queries.client.get);
+	const clientQuery = useQuery(queries.client.get);
 
-	return useMutation({
-		mutationKey: ["add-client"],
+	const mutation = useMutation({
 		mutationFn: mongodbSDKClient.services.clients.add,
 
-		onSuccess: async (data) => {
-			if (!data.success) {
-				setError(String(data.message));
-				return;
-			}
+		onSuccess: async (result) => {
+			if (!result.success) return;
 
-			client.log("[ADD CLIENT] Success:", data.success);
+			await new Promise((resolve) => setTimeout(resolve, 5000));
 
-			if (data.success) refetch();
-		},
-
-		onError: (error) => {
-			setError(error.message);
+			await clientQuery.refetch();
+			await router.invalidate();
 		},
 	});
-};
 
-export { useAddClientEntry };
+	return {
+		...mutation,
+		refetch: clientQuery.refetch,
+	};
+};

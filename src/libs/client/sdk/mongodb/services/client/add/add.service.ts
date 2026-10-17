@@ -37,9 +37,12 @@ export const add = createServerFn({ method: "POST" })
 			if (isAxiosError<HTTPResponse<{ data: unknown }>>(error)) {
 				return {
 					success: false,
-					message: error.response?.data.message ?? "Request failed.",
+					message: error.response?.data?.message ?? "Request failed.",
 					statusText:
-						error.response?.data?.statusText ?? "Internal Server Error",
+						error.response?.data?.statusText ??
+						(error.response?.status === 401
+							? "Unauthorized"
+							: "Internal Server Error"),
 				};
 			}
 
