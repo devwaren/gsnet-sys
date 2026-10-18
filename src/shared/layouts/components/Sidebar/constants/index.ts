@@ -30,7 +30,7 @@ export const links = [
 	},
 	{
 		label: "Registered Clients",
-		link: "/dashboard/registered-clients",
+		link: "/dashboard/clients",
 		icon: UsersRound,
 	},
 	{

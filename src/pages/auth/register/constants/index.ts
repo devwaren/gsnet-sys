@@ -18,6 +18,12 @@ export const fields: FormField[] = [
 		type: "text",
 	},
 	{
+		name: "displayName",
+		placeholder: "Enter Display name",
+		type: "text",
+		className: "col-span-2",
+	},
+	{
 		name: "username",
 		placeholder: "Enter username",
 		type: "text",

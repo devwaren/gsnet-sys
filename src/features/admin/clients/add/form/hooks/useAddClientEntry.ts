@@ -1,12 +1,15 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { queries } from "#/libs/client/queries";
 import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
+import { useModalStore } from "#/shared/store/modal";
+import { usePendingStore } from "#/shared/store/pending";
 
 export const useAddClientEntry = () => {
 	const router = useRouter();
+	const { setIsModal } = useModalStore();
+	const { setIsPending } = usePendingStore();
 
-	const clientQuery = useQuery(queries.client.get);
+	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
 		mutationFn: mongodbSDKClient.services.clients.add,
@@ -14,15 +17,14 @@ export const useAddClientEntry = () => {
 		onSuccess: async (result) => {
 			if (!result.success) return;
 
-			await new Promise((resolve) => setTimeout(resolve, 5000));
-
-			await clientQuery.refetch();
+			setIsPending(true);
+			queryClient.invalidateQueries({ queryKey: ["registered"] });
 			await router.invalidate();
+			setIsModal(false);
 		},
 	});
 
 	return {
 		...mutation,
-		refetch: clientQuery.refetch,
 	};
 };

@@ -5,6 +5,7 @@ import { login } from "./login.schema";
 import { otp } from "./otp.schema";
 import { register } from "./register.schema";
 import { resetPassword } from "./reset-password.schema";
+import { users } from "./user.schema";
 
 export const auth = {
 	login,
@@ -14,4 +15,5 @@ export const auth = {
 	otp,
 	jwt,
 	upload,
+	users,
 };

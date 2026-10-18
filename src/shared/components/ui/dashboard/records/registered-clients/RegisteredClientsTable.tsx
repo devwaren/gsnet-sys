@@ -1,6 +1,6 @@
 import type { z } from "@dev-waren/react-form-kit";
 import { useQuery } from "@tanstack/react-query";
-import { mongodbSDKClient } from "#/libs/client/sdk/mongodb";
+import { queries } from "#/libs/client/queries";
 import type { schema } from "#/libs/shared/validations";
 import { ViewModal } from "#/shared/components/modals/client";
 import { TableActions } from "#/shared/components/ui/dashboard/actions";
@@ -13,14 +13,7 @@ type ClientRow = z.infer<typeof schema.customer.client>;
 export default function RegisteredClientsTable() {
 	const { selection, setSelection } = useSelectionStore();
 
-	const {
-		data: client,
-		isPending,
-		isError,
-	} = useQuery({
-		queryKey: ["registered"],
-		queryFn: mongodbSDKClient.services.clients.get,
-	});
+	const { data: client, isPending, isError } = useQuery(queries.client.get);
 
 	const columns = [
 		{
@@ -85,7 +78,7 @@ export default function RegisteredClientsTable() {
 				label="Registered Clients"
 				desc="Latest list of subscribers"
 				columns={columns}
-				data={client.data ?? []}
+				data={(client.data ?? []) as ClientRow[]}
 				actionLabel="View All"
 				onAction={() => console.log("View all clients")}
 				emptyMessage="No registered clients found."

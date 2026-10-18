@@ -21,7 +21,7 @@ export const collections = {
 	}),
 	clients: collection({
 		name: "clients",
-		schema: schemaServer.clients,
+		schema: schemaServer.client,
 	}),
 	tokens: collection({
 		name: "tokens",

@@ -1,5 +1,4 @@
-import { objectId, sanitize, z } from "@dev-waren/mongodb";
-import { intlDate } from "@dev-waren/react-form-kit";
+import { intlDate, sanitize, z } from "@dev-waren/react-form-kit";
 
 const dateString = z
 	.string({
@@ -62,26 +61,23 @@ const installation = z.object({
 	}),
 });
 
-export const clients = z.object({
-	_id: objectId,
+const capitalized = (value: string) =>
+	sanitize(value.trim())
+		.toLowerCase()
+		.replace(/\b\p{L}/gu, (char) => char.toUpperCase());
 
-	pppoeId: z
-		.string()
-		.trim()
-		.min(1, { message: "PPPoE ID is required." })
-		.transform(sanitize),
-
+export const client = z.object({
 	firstName: z
 		.string()
 		.trim()
 		.min(1, { message: "First name is required." })
-		.transform(sanitize),
+		.transform(capitalized),
 
 	lastName: z
 		.string()
 		.trim()
 		.min(1, { message: "Last name is required." })
-		.transform(sanitize),
+		.transform(capitalized),
 
 	phone: z
 		.string()
