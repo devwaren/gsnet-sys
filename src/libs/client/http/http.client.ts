@@ -1,5 +1,6 @@
 import { createClientOnlyFn } from "@tanstack/react-start";
 import axios, { AxiosError, type AxiosRequestConfig } from "axios";
+import { clientOnly } from "#/libs/client/utils";
 
 type HttpClientConfig = AxiosRequestConfig & {
 	url: string;
@@ -12,6 +13,8 @@ const axiosClient = axios.create({
 
 export const httpClient = createClientOnlyFn(
 	async <T = unknown>({ url, ...config }: HttpClientConfig): Promise<T> => {
+		clientOnly("httpClient");
+
 		try {
 			const response = await axiosClient.request<T>({
 				url,

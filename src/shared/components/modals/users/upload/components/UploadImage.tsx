@@ -1,6 +1,6 @@
 import { ImagePlus, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useUploadImage } from "./hooks";
+import { styles } from "./styles";
 
 type UploadImageProps = {
 	accept?: string;
@@ -11,127 +11,50 @@ export function UploadImage({
 	accept = "image/png,image/jpeg,image/webp,image/gif",
 	maxSizeMB = 5,
 }: UploadImageProps) {
-	const inputRef = useRef<HTMLInputElement>(null);
-	const [preview, setPreview] = useState<string | null>(null);
-	const [fileName, setFileName] = useState("");
-	const [isDragging, setIsDragging] = useState(false);
-	const [error, setError] = useState("");
-
-	const { setValue, clearErrors } = useFormContext<{ image: File }>();
-
-	useEffect(() => {
-		return () => {
-			if (preview) URL.revokeObjectURL(preview);
-		};
-	}, [preview]);
-
-	const handleFile = (file?: File) => {
-		if (!file) return;
-
-		if (
-			!["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
-				file.type,
-			)
-		) {
-			setError("Only JPEG, PNG, WebP, and GIF images are allowed.");
-			return;
-		}
-
-		if (file.size === 0) {
-			setError("Image cannot be empty.");
-			return;
-		}
-
-		if (file.size > maxSizeMB * 1024 * 1024) {
-			setError(`Image must be ${maxSizeMB} MB or smaller.`);
-			return;
-		}
-
-		if (preview) URL.revokeObjectURL(preview);
-
-		setError("");
-		clearErrors("image");
-		setPreview(URL.createObjectURL(file));
-		setFileName(file.name);
-
-		setValue("image", file, {
-			shouldDirty: true,
-			shouldTouch: true,
-			shouldValidate: true,
-		});
-	};
-
-	const removeImage = () => {
-		if (preview) URL.revokeObjectURL(preview);
-
-		setPreview(null);
-		setFileName("");
-		setError("");
-
-		setValue("image", undefined as unknown as File, {
-			shouldDirty: true,
-			shouldTouch: true,
-			shouldValidate: true,
-		});
-
-		if (inputRef.current) {
-			inputRef.current.value = "";
-		}
-	};
+	const {
+		inputRef,
+		preview,
+		fileName,
+		isDragging,
+		error,
+		handleInputChange,
+		handleDragOver,
+		handleDragLeave,
+		handleDrop,
+		removeImage,
+	} = useUploadImage({ maxSizeMB });
 
 	return (
-		<div className="w-full space-y-2">
+		<div className={styles.root}>
 			<input
 				ref={inputRef}
 				type="file"
 				accept={accept}
-				className="hidden"
-				onChange={(event) => {
-					handleFile(event.target.files?.[0]);
-					event.target.value = "";
-				}}
+				className={styles.input}
+				onChange={handleInputChange}
 			/>
 
-			<div className="relative">
+			<div className={styles.wrapper}>
 				<button
 					type="button"
 					onClick={() => inputRef.current?.click()}
-					onDragOver={(event) => {
-						event.preventDefault();
-						setIsDragging(true);
-					}}
-					onDragLeave={() => setIsDragging(false)}
-					onDrop={(event) => {
-						event.preventDefault();
-						setIsDragging(false);
-						handleFile(event.dataTransfer.files?.[0]);
-					}}
-					className={`flex min-h-48 w-full cursor-pointer flex-col
-            items-center justify-center overflow-hidden rounded-xl
-            border-2 border-dashed p-6 transition-colors ${
-							isDragging
-								? "border-blue-500 bg-blue-50"
-								: "border-gray-300 hover:border-blue-400"
-						}`}
+					onDragOver={handleDragOver}
+					onDragLeave={handleDragLeave}
+					onDrop={handleDrop}
+					className={styles.button({
+						state: isDragging ? "dragging" : "idle",
+					})}
 				>
 					{preview ? (
 						<>
-							<img
-								src={preview}
-								alt={fileName}
-								className="pointer-events-none max-h-64 max-w-full rounded-lg object-contain"
-							/>
-							<p className="mt-3 max-w-full truncate text-sm text-gray-600">
-								{fileName}
-							</p>
+							<img src={preview} alt={fileName} className={styles.preview} />
+							<p className={styles.fileName}>{fileName}</p>
 						</>
 					) : (
 						<>
-							<ImagePlus size={36} className="mb-3 text-gray-400" />
-							<p className="text-sm font-medium text-gray-700">
-								Drag and drop an image here
-							</p>
-							<p className="mt-1 text-xs text-gray-500">
+							<ImagePlus size={36} className={styles.icon} />
+							<p className={styles.title}>Drag and drop an image here</p>
+							<p className={styles.description}>
 								or click to browse · Max {maxSizeMB} MB
 							</p>
 						</>
@@ -143,7 +66,7 @@ export function UploadImage({
 						type="button"
 						aria-label="Remove image"
 						onClick={removeImage}
-						className="absolute right-3 top-3 rounded-full bg-black/70 p-2 text-white hover:bg-black"
+						className={styles.remove}
 					>
 						<X size={16} />
 					</button>
@@ -151,7 +74,7 @@ export function UploadImage({
 			</div>
 
 			{error && (
-				<p role="alert" className="text-sm text-red-500">
+				<p role="alert" className={styles.error}>
 					{error}
 				</p>
 			)}

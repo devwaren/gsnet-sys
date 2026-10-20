@@ -1,6 +1,6 @@
 import { useFormSettings } from "@dev-waren/react-form-kit/hook-form";
 import { schema } from "#/libs/shared/validations";
-import { useUploadAttachmentEntry } from "./useUploadAttachmentEntry";
+import { useUploadAttachmentEntry } from "./useChangeProfileEntry";
 
 const useUploadAttachmentForm = () => {
 	const mutation = useUploadAttachmentEntry();

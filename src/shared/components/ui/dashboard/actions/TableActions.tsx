@@ -1,11 +1,8 @@
 import type { z } from "@dev-waren/react-form-kit";
 import { Eye, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
-import type { schema } from "#/libs/shared/validations";
 
-type ClientRow = z.infer<typeof schema.customer.client> & {
-	pppoeId?: string;
-};
+type ClientRow = z.infer<z.AnyZodObject>;
 
 export function TableActions({
 	row,

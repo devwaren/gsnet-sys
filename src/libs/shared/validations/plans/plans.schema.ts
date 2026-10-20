@@ -32,8 +32,4 @@ export const internetPlan = z.object({
 	isPopular: z.boolean().default(false),
 
 	installationFee: z.number().nonnegative().default(0),
-
-	createdAt: z.date().default(() => new Date()),
-
-	updatedAt: z.date().default(() => new Date()),
 });

@@ -1,9 +1,12 @@
 import type { AxiosRequestConfig } from "axios";
 import { env } from "#/libs/server/env";
-import { serverOnly } from "./http.server";
+import { httpServerService } from "./services";
+import { serverOnly } from "./services/guard";
 
 const httpServer = <T = unknown>(config: AxiosRequestConfig) => {
-	return serverOnly<T>({
+	serverOnly();
+
+	return httpServerService<T>({
 		...config,
 		baseURL: env.server.url,
 		withCredentials: true,

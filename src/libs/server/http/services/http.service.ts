@@ -1,14 +1,11 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import type { AxiosResponse } from "axios";
 import axios, { AxiosError } from "axios";
-import { server } from "#/libs/server/utils";
-import { gen } from "../gen";
+import { gen } from "#/libs/server/gen";
+import { server } from "#/libs/server/utils/log";
+import type { HttpServerConfig } from "./types";
 
-type HttpServerConfig = AxiosRequestConfig & {
-	request?: Request;
-};
-
-export const serverOnly = createServerOnlyFn(
+export const httpServerService = createServerOnlyFn(
 	async <T = unknown>(config: HttpServerConfig): Promise<AxiosResponse<T>> => {
 		const controller = new AbortController();
 

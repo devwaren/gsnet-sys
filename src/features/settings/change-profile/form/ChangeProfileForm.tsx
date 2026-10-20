@@ -4,7 +4,7 @@ import { useUploadAttachmentForm } from "./hooks";
 
 type Props = ComponentProps<"form">;
 
-export function UploadAttachmentForm({ children, ...props }: Props) {
+export function ChangeProfileForm({ children, ...props }: Props) {
 	const form = useUploadAttachmentForm();
 
 	return (
