@@ -4,7 +4,7 @@ import { httpServerService } from "./services";
 import { serverOnly } from "./services/guard";
 
 const httpServer = <T = unknown>(config: AxiosRequestConfig) => {
-	serverOnly();
+	serverOnly("httpServer");
 
 	return httpServerService<T>({
 		...config,

@@ -1,9 +1,15 @@
+import { setEnv } from "@dev-waren/mongodb";
 import { createServerOnlyFn } from "@tanstack/react-start";
 import type { AxiosResponse } from "axios";
 import axios, { AxiosError } from "axios";
 import { gen } from "#/libs/server/gen";
 import { server } from "#/libs/server/utils/log";
 import type { HttpServerConfig } from "./types";
+
+const axiosServer = axios.create({
+	baseURL: setEnv("BASE_URL"),
+	withCredentials: true,
+});
 
 export const httpServerService = createServerOnlyFn(
 	async <T = unknown>(config: HttpServerConfig): Promise<AxiosResponse<T>> => {
@@ -34,7 +40,7 @@ export const httpServerService = createServerOnlyFn(
 
 			server.log("[BFF] HTTP Server Initiated");
 
-			const res = await axios<T>({
+			const res = await axiosServer<T>({
 				...axiosConfig,
 				signal: axiosConfig.signal ?? controller.signal,
 				headers: {

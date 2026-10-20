@@ -1,15 +1,11 @@
 import { createClientOnlyFn } from "@tanstack/react-start";
-import axios, { AxiosError, type AxiosRequestConfig } from "axios";
+import { AxiosError, type AxiosRequestConfig } from "axios";
 import { clientOnly } from "#/libs/client/utils";
+import { axiosClient } from "./config";
 
 type HttpClientConfig = AxiosRequestConfig & {
 	url: string;
 };
-
-const axiosClient = axios.create({
-	baseURL: import.meta.env.BASE_URL,
-	withCredentials: true,
-});
 
 export const httpClient = createClientOnlyFn(
 	async <T = unknown>({ url, ...config }: HttpClientConfig): Promise<T> => {

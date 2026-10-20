@@ -1,5 +1,5 @@
-export const serverOnly = () => {
+export const serverOnly = (name: string) => {
 	if (typeof window !== "undefined") {
-		throw new Error("httpServer can only be used on the server.");
+		throw new Error(`${name} can only be used on the server.`);
 	}
 };
