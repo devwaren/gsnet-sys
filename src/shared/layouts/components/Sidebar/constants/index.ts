@@ -1,4 +1,5 @@
 import {
+	Banknote,
 	Coins,
 	DollarSign,
 	KeySquare,
@@ -9,6 +10,7 @@ import {
 	UserSquare,
 	Users2,
 	UsersRound,
+	Wallet,
 } from "lucide-react";
 
 export const links = [
@@ -42,6 +44,19 @@ export const links = [
 		label: "Settings",
 		link: "/dashboard/settings",
 		icon: Settings,
+	},
+];
+
+export const staffLinks = [
+	{
+		label: "Invoices",
+		link: "/dashboard/staff/invoices",
+		icon: Wallet,
+	},
+	{
+		label: "Billing",
+		link: "/dashboard/staff/billing",
+		icon: Banknote,
 	},
 ];
 

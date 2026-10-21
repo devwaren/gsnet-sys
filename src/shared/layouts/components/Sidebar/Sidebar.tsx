@@ -2,13 +2,15 @@ import { motion } from "motion/react";
 import { NavLinks } from "#/shared/components/items";
 import { useSession } from "#/shared/hooks";
 import { useSidebarStore } from "#/shared/store/sidebar";
-import { adminLinks, links } from "./constants";
+import { adminLinks, links, staffLinks } from "./constants";
 
 export default function Sidebar() {
 	const { role } = useSession();
 	const { isOpen, closeSidebar } = useSidebarStore();
 
 	const isAdmin = role === "admin";
+
+	const isStaff = role === "staff";
 
 	return (
 		<>
@@ -52,6 +54,20 @@ export default function Sidebar() {
 
 						<NavLinks links={links} />
 					</nav>
+
+					{isStaff ||
+						(isAdmin && (
+							<nav
+								aria-label="Staff Navigation"
+								className="space-y-2 text-gray-600"
+							>
+								<h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+									Staff Menu
+								</h2>
+
+								<NavLinks links={staffLinks} />
+							</nav>
+						))}
 
 					{isAdmin && (
 						<nav

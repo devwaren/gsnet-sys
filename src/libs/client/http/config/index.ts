@@ -1,6 +1,7 @@
+import { setEnv } from "@dev-waren/react-form-kit";
 import axios from "axios";
 
 export const axiosClient = axios.create({
-	baseURL: import.meta.env.BASE_URL,
+	baseURL: setEnv("VITE_API_URL"),
 	withCredentials: true,
 });
