@@ -1,5 +1,5 @@
 import { useFormSettings } from "@dev-waren/react-form-kit/hook-form";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 import { useUploadAttachmentEntry } from "./useChangeProfileEntry";
 
 const useUploadAttachmentForm = () => {

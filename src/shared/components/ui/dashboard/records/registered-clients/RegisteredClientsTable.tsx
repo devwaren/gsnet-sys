@@ -1,7 +1,7 @@
 import type { z } from "@dev-waren/react-form-kit";
 import { useQuery } from "@tanstack/react-query";
 import { queries } from "#/libs/client/queries";
-import type { schema } from "#/libs/shared/validations";
+import type { schema } from "#/libs/shared/schema";
 import { ViewModal } from "#/shared/components/modals/client";
 import { TableActions } from "#/shared/components/ui/dashboard/actions";
 import { Table } from "#/shared/components/ui/table";

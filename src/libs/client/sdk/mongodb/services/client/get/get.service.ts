@@ -2,8 +2,8 @@ import type { z } from "@dev-waren/mongodb";
 import { createServerFn } from "@tanstack/react-start";
 import { isAxiosError } from "axios";
 import { httpServer } from "#/libs/server/http";
+import type { schema } from "#/libs/shared/schema";
 import type { HTTPResponse } from "#/libs/shared/types";
-import type { schema } from "#/libs/shared/validations";
 
 type Customer = z.infer<typeof schema.customer.client>;
 

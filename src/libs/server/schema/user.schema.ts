@@ -1,5 +1,5 @@
 import { objectId, sanitize, z } from "@dev-waren/mongodb";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const userId = z.object({
 	_id: objectId,

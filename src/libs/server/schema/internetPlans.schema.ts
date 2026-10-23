@@ -1,5 +1,5 @@
 import { objectId, z } from "@dev-waren/mongodb";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const planId = z.object({
 	_id: objectId,

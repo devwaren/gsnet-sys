@@ -1,6 +1,6 @@
 import { intlDate } from "@dev-waren/react-form-kit";
 import { useFormSettings } from "@dev-waren/react-form-kit/hook-form";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 import { useAddClientEntry } from "./useAddClientEntry";
 
 const useAddClientForm = () => {

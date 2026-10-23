@@ -1,7 +1,7 @@
 import type { z } from "@dev-waren/react-form-kit";
 import { X } from "lucide-react";
 import { useState } from "react";
-import type { schema } from "#/libs/shared/validations";
+import type { schema } from "#/libs/shared/schema";
 import { Table } from "#/shared/components/ui/table";
 import { Modal } from "#/shared/layouts";
 import { useSelectionStore } from "#/shared/store/selection";

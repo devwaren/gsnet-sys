@@ -3,8 +3,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { isAxiosError } from "axios";
 import { httpServer } from "#/libs/server/http";
+import type { schema } from "#/libs/shared/schema";
 import type { HTTPResponse } from "#/libs/shared/types";
-import type { schema } from "#/libs/shared/validations";
 
 type Users = z.infer<typeof schema.auth.users>;
 

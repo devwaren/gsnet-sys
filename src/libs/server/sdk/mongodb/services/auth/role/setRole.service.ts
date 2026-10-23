@@ -3,7 +3,7 @@ import { getCookie } from "@tanstack/react-start/server";
 import { http } from "#/libs/server/constants";
 import { invalid } from "#/libs/server/res";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 export const setRole = createServerOnlyFn(async ({ request }) => {
 	const body = await request.json();

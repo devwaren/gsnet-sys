@@ -1,5 +1,5 @@
 import type { z } from "@dev-waren/react-form-kit";
-import type { schema } from "#/libs/shared/validations";
+import type { schema } from "#/libs/shared/schema";
 
 type InternetPlan = z.infer<typeof schema.internetPlan>;
 

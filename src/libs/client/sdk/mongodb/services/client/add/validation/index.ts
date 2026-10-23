@@ -1,4 +1,4 @@
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const addClient = async (data: unknown) => {
 	const result = schema.customer.client.safeParse(data);

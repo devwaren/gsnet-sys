@@ -1,6 +1,9 @@
-import type { FormField } from "#/shared/types";
+import type { FormField, z } from "@dev-waren/react-form-kit";
+import type { schema } from "#/libs/shared/schema";
 
-export const fields: FormField[] = [
+type Token = z.infer<typeof schema.admin.token>;
+
+export const fields: FormField<Token>[] = [
 	{
 		name: "email",
 		type: "email",

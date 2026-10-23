@@ -1,5 +1,6 @@
 import { Mapper } from "@dev-waren/react-form-kit";
 import { FileText, Wallet } from "lucide-react";
+import { styles } from "./styles";
 
 const stats = [
 	{
@@ -18,20 +19,13 @@ const stats = [
 
 export function InvoiceSummary() {
 	return (
-		<Mapper
-			items={stats}
-			listFor="items"
-			className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2"
-		>
+		<Mapper items={stats} listFor="items" className={styles.summaryMapper()}>
 			{({ title, value, desc, icon: Icon }) => (
-				<div
-					key={title}
-					className="flex items-start justify-between gap-4 rounded-xl bg-white border border-gray-200 p-5"
-				>
+				<div className={styles.icons()}>
 					<div className="space-y-2">
-						<h2 className="text-sm font-medium text-gray-600">{title}</h2>
-						<p className="text-2xl font-semibold tracking-tight">{value}</p>
-						<p className="text-sm text-gray-500">{desc}</p>
+						<h2 className={styles.h2()}>{title}</h2>
+						<p className={styles.value()}>{value}</p>
+						<p className={styles.desc()}>{desc}</p>
 					</div>
 
 					<div className="rounded-lg bg-gray-100 p-3">

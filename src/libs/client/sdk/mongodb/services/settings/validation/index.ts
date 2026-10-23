@@ -1,4 +1,4 @@
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const resetPassword = async (data: unknown) => {
 	const result = schema.auth.resetPassword.safeParse(data);

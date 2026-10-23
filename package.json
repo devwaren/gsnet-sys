@@ -19,7 +19,7 @@
   "dependencies": {
     "@dev-waren/mongodb": "^1.0.52",
     "@dev-waren/react-devtool-disabler": "^1.0.2",
-    "@dev-waren/react-form-kit": "^1.6.24",
+    "@dev-waren/react-form-kit": "^1.6.25",
     "@dev-waren/weather-api": "^0.1.1",
     "@faker-js/faker": "^10.3.0",
     "@tailwindcss/vite": "^4.1.18",

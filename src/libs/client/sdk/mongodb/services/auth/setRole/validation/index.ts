@@ -1,4 +1,4 @@
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const setRole = async (data: unknown) => {
 	const result = schema.admin.token.safeParse(data);

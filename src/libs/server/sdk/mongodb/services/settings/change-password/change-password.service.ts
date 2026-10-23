@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 import { http } from "#/libs/server/constants";
 import { invalid, unauthorized } from "#/libs/server/res";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 export const changePassword = createServerOnlyFn(
 	async ({ request }: { request: Request }) => {

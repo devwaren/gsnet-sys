@@ -34,7 +34,7 @@ export function InvoiceFilters({ invoices }: Props) {
 				items={filteredInvoices}
 				className={styles.invoiceCards()}
 			>
-				{(item: Invoice) => <InvoiceCard key={item.id} data={item} />}
+				{(item: Invoice) => <InvoiceCard data={item} />}
 			</Mapper>
 		</div>
 	);

@@ -16,6 +16,10 @@ const register = z
 			.string()
 			.min(2, { message: "surname is required." })
 			.transform(sanitize),
+		displayName: z
+			.string()
+			.min(2, { message: "displayName is required." })
+			.transform(sanitize),
 		email: z.string().email({ message: "email is required." }),
 		avatar: z.string().optional().default(""),
 		password: z

@@ -1,5 +1,5 @@
 import { server } from "#/libs/server/utils";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 const login = (data: unknown) => {
 	const result = schema.auth.login.safeParse(data);

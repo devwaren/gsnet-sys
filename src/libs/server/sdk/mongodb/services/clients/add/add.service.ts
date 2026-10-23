@@ -3,7 +3,7 @@ import { http } from "#/libs/server/constants";
 import { gen } from "#/libs/server/gen";
 import { invalid } from "#/libs/server/res";
 import { collections } from "#/libs/server/sdk/mongodb/collections";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 
 export const add = createServerOnlyFn(
 	async ({ request }: { request: Request }) => {

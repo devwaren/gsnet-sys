@@ -1,6 +1,6 @@
 import { useFormSettings } from "@dev-waren/react-form-kit/hook-form";
 import { client } from "#/libs/client/utils";
-import { schema } from "#/libs/shared/validations";
+import { schema } from "#/libs/shared/schema";
 import { usePending } from "#/shared/hooks";
 import { useOtpStore } from "#/shared/store/otp";
 import { useOtpEntry } from "./useOtpEntry";

@@ -1,5 +1,4 @@
 import { schemaServer } from "#/libs/server/schema";
-import { schema } from "#/libs/shared/validations";
 import { collection } from "../config";
 
 export const collections = {
@@ -29,6 +28,10 @@ export const collections = {
 	}),
 	registration: collection({
 		name: "registration",
-		schema: schema.admin.token,
+		schema: schemaServer.adminToken,
+	}),
+	invoices: collection({
+		name: "invoices",
+		schema: schemaServer.invoices,
 	}),
 };
